@@ -7,6 +7,10 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 import userRoutes from "./routes/auth.js";
+import serverRoutes from "./routes/server.js";
+import channelRoutes from "./routes/channel.js";
+import eventRoutes from "./routes/event.js";
+import infoRoutes from "./routes/userInfo.js";
 
 const app = express();
 
@@ -23,12 +27,10 @@ app.use(
 );
 
 app.use("/auth", userRoutes);
-
-// app.use("/server", serverRoutes);
-// app.use("/server", channelRoutes);
-// app.use("/server", eventRoutes);
-
-// app.use("/info", infoRoutes);
+app.use("/server", serverRoutes);
+app.use("/server", channelRoutes);
+app.use("/server", eventRoutes);
+app.use("/info", infoRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
