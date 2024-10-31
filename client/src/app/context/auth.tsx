@@ -51,10 +51,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = async (data: User) => {
     try {
       const res = await registerRequest(data);
-      console.log(res);
       setUser(res.data);
     } catch (err: unknown) {
-      console.log(err);
       if (err instanceof Error) {
         setError([err.message]);
       }
@@ -64,10 +62,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (data: LoginRequest) => {
     try {
       const res = await loginRequest(data);
-      console.log(res);
       setUser(res.data);
     } catch (err: unknown) {
-      console.log(err);
       if (err instanceof Error) {
         setError([err.message]);
       }
@@ -93,6 +89,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           setIsAuthenticated(false);
         } else {
           setIsAuthenticated(true);
+          setUser(res.data);
           setLoading(false);
         }
       } catch (err: unknown) {
