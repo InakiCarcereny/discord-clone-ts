@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 
 import { AuthProvider } from "@/app/context/auth";
+import { ServerProvider } from "./(routes)/home/context/server";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.className} ${poppins.className} antialiased`}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <ServerProvider>{children}</ServerProvider>
+        </AuthProvider>
       </body>
     </html>
   );
