@@ -2,12 +2,13 @@ import { FieldValues, UseFormRegister } from "react-hook-form";
 
 interface InputRegisterProps {
   label: string;
+  placeholder?: string;
   type: string;
   id: string;
   required: string;
   value: RegExp;
-  message: string;
-  error: Record<string, unknown> | undefined;
+  message?: string;
+  error?: Record<string, unknown> | undefined;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormReturn<FieldValues>["register"] | any;
 }
@@ -18,6 +19,7 @@ type UseFormReturn<TFieldValues extends FieldValues = FieldValues> = {
 
 export function InputRegister({
   label,
+  placeholder,
   type,
   id,
   required,
@@ -44,9 +46,10 @@ export function InputRegister({
         )}
       </div>
       <input
+        placeholder={placeholder}
         type={type}
         id={id}
-        className="w-full rounded-[4px] bg-zinc-900 px-2 py-1 text-white h-12 focus:outline-none text-sm"
+        className="w-full rounded-[4px] bg-zinc-900 px-2 py-1 text-white h-12 focus:outline-none text-sm placeholder:text-zinc-300"
         {...register(id, {
           required: required,
           pattern: {
