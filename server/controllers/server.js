@@ -90,6 +90,7 @@ export const createServer = async (req, res) => {
 
     const defaultChannel = new Channel({
       name: "General",
+      type: "text",
       server: savedServer._id,
     });
 
@@ -97,6 +98,7 @@ export const createServer = async (req, res) => {
 
     res.status(201).json(savedServer);
   } catch (err) {
+    console.log(err);
     res.status(500).json(["Error creating server"]);
   }
 };
