@@ -8,3 +8,4 @@ export * from "./home-aside/HomeAside";
 export * from "./navigate-option/NavigateOption";
 export * from "./search-server-modal/SearchServerModal";
 export * from "./friends-nav/FriendsNav";
+export * from "./server-selected-aside/ServerSelectedAside";
