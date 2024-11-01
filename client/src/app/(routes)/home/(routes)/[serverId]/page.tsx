@@ -1,3 +1,5 @@
+import { ServerSelected } from "./components/server-selected/ServerSelected";
+
 export default async function Server({
   params,
 }: {
@@ -5,5 +7,9 @@ export default async function Server({
 }) {
   const serverId = (await params).serverId;
 
-  return <div>{serverId}</div>;
+  return (
+    <>
+      <ServerSelected serverId={serverId} />
+    </>
+  );
 }
