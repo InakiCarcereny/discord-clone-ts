@@ -8,7 +8,7 @@ export function ServerSelected({ serverId }: { serverId: string }) {
   const filteredServer = server.filter((server) => server._id === serverId);
 
   return (
-    <div>
+    <div className="">
       {filteredServer.map((server) => {
         return <div key={server._id}>{server.tittle}</div>;
       })}

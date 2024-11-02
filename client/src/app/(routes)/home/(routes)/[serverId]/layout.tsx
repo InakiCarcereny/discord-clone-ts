@@ -15,8 +15,10 @@ export default function ServerLayout({
       <div>
         <ServerSelectedAside />
       </div>
-      <div>{children}</div>
-      <div>hola</div>
+      <div className="flex-grow -my-3">{children}</div>
+      <div className="h-screen w-[240px] bg-[#27282c] flex flex-col gap-2 -mx-6 -my-3">
+        hola
+      </div>
     </div>
   );
 }
