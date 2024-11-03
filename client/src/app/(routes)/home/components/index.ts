@@ -9,3 +9,6 @@ export * from "./navigate-option/NavigateOption";
 export * from "./search-server-modal/SearchServerModal";
 export * from "./friends-nav/FriendsNav";
 export * from "./server-selected-aside/ServerSelectedAside";
+export * from "./server-options-button/ServerOptionsButton";
+export * from "./server-options-modal/ServerOptionsModal";
+export * from "./create-channel-modal/CreateChannelModal";
