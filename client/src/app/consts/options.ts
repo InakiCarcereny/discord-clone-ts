@@ -6,7 +6,7 @@ export const options = [
     id: 1,
     label: "Friends",
     icon: Greeting({}),
-    href: "/home/friends",
+    href: "/home",
   },
   {
     id: 2,
