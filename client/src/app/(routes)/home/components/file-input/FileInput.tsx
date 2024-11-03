@@ -1,3 +1,5 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
 import { UseFormRegister } from "react-hook-form";
