@@ -16,7 +16,11 @@ export default function HomeLayout({ children }: { children: ReactNode }) {
 
   const { loading, isAuthenticated } = useAuth();
 
-  const showHomeAside = pathname === "/home";
+  const showHomeLayout =
+    pathname === "/home" ||
+    pathname === "/home/addFriend" ||
+    pathname === "/home/all" ||
+    pathname === "/home/pendent";
 
   useEffect(() => {
     if (!loading) {
@@ -33,12 +37,12 @@ export default function HomeLayout({ children }: { children: ReactNode }) {
       <div className="flex">
         <ServerAside />
 
-        {showHomeAside && <HomeAside />}
+        {showHomeLayout && <HomeAside />}
       </div>
 
       <div className="flex flex-col gap-2 px-6 py-3 w-full h-full">
-        {showHomeAside && <FriendsNav />}
-        {showHomeAside && (
+        {showHomeLayout && <FriendsNav />}
+        {showHomeLayout && (
           <Separator className="border border-[#2b2c31] rounded-full -mx-6" />
         )}
         <main>{children}</main>
