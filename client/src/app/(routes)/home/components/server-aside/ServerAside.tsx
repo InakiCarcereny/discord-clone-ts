@@ -1,3 +1,5 @@
+"use client";
+
 import { useModal } from "@/app/hooks/useModal";
 
 import { Discord } from "@/app/icons/Discord";

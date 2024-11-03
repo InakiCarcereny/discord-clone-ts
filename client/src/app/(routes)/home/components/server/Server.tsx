@@ -1,3 +1,5 @@
+"use client";
+
 import { Logo } from "@/app/models/logo";
 
 import { usePathname } from "next/navigation";

@@ -1,3 +1,5 @@
+"use client";
+
 import { convertToBase64 } from "@/app/utils/convertToBase64";
 import { useServer } from "../../context/server";
 import Link from "next/link";
