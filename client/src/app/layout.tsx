@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { AuthProvider } from "@/app/context/auth";
 import { ServerProvider } from "./(routes)/home/context/server";
+import { UserInfoProvider } from "./(routes)/home/(routes)/profile/context/userInfo";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,7 +26,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.className} ${poppins.className} antialiased`}>
         <AuthProvider>
-          <ServerProvider>{children}</ServerProvider>
+          <ServerProvider>
+            <UserInfoProvider>{children}</UserInfoProvider>
+          </ServerProvider>
         </AuthProvider>
       </body>
     </html>
