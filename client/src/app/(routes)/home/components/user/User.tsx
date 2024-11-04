@@ -1,20 +1,22 @@
 import { useAuth } from "@/app/context/auth";
-import { useModal } from "@/app/hooks/useModal";
-import { Headphones } from "@/app/icons/Headphones";
-import { Microphone } from "@/app/icons/Microphone";
-import { Settings } from "@/app/icons/Settings";
 
-import { convertToBase64 } from "@/app/utils/convertToBase64";
+import { useModal } from "@/app/hooks/useModal";
+
+import { userButtons } from "@/app/consts/userButtons";
+
+// import { convertToBase64 } from "@/app/utils/convertToBase64";
 
 export function User() {
   const { user } = useAuth();
 
-  const { isOpen, openModal, closeModal } = useModal();
+  const { isOpen, toggleModal } = useModal();
+
+  const open = isOpen === "user-modal";
 
   return (
-    <div className="absolute bottom-0 left-[70px] w-[240px] h-[75px] bg-[#202024] border-t border-[#33353b]">
+    <div className="absolute bottom-0 left-[70px] w-[240px] h-[60px] bg-[#202024] border-t border-[#33353b] flex items-center justify-between px-2">
       <button
-        onClick={() => openModal("user-modal")}
+        onClick={() => toggleModal("user-modal")}
         className="text-white text-xs hover:bg-zinc-600 rounded-[4px] px-1 flex items-center gap-2"
       >
         {/* {avatarBase64 ? (
@@ -27,15 +29,24 @@ export function User() {
             {user?.username}
           </span>
           <span className="text-xs text-gray-400 font-semibold">
-            {/* {user?.username} */}
+            {/* {user?.name} */}
           </span>
         </div>
       </button>
       <div className="flex items-center">
-        <Microphone className=" hover:bg-zinc-600 rounded-[4px] py-1 px-1 text-white h-7 w-7" />
-        <Headphones className=" hover:bg-zinc-600 rounded-[4px] py-1 px-1 text-white h-8 w-8" />
-        <Settings className=" hover:bg-zinc-600 rounded-[4px] py-1 px-1 text-white h-7 w-7" />
+        {userButtons.map((button) => {
+          return (
+            <button
+              key={button.id}
+              className="hover:bg-zinc-600 rounded-[4px] py-1 px-1 text-white"
+            >
+              {button.icon}
+            </button>
+          );
+        })}
       </div>
+
+      {open && <div>hola</div>}
     </div>
   );
 }
