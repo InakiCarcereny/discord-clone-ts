@@ -36,11 +36,10 @@ export function CreateServerModal({ onCloseModal }: CreateServerModalProps) {
 
   return (
     <div
-      onClick={onCloseModal}
       aria-modal="true"
       aria-labelledby="create-server"
       role="dialog"
-      className="inset-0 absolute flex items-center justify-center w-full h-full bg-black bg-opacity-60"
+      className="inset-0 z-50 absolute flex items-center justify-center w-full h-full bg-black bg-opacity-60"
     >
       <form
         onSubmit={onSubmit}
