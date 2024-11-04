@@ -5,22 +5,17 @@ import { useAuth } from "@/app/context/auth";
 import { ReactNode, useEffect } from "react";
 
 import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
 
 import { FriendsNav, HomeAside, ServerAside, User } from "./components";
 import { Separator } from "@/app/components";
+import { useHomeLayout } from "@/app/hooks/useHomeLayout";
 
 export default function HomeLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const pathname = usePathname();
+
+  const { showHomeLayout, showUserCard } = useHomeLayout();
 
   const { loading, isAuthenticated } = useAuth();
-
-  const showHomeLayout =
-    pathname === "/home" ||
-    pathname === "/home/addFriend" ||
-    pathname === "/home/all" ||
-    pathname === "/home/pendent";
 
   useEffect(() => {
     if (!loading) {
@@ -48,7 +43,7 @@ export default function HomeLayout({ children }: { children: ReactNode }) {
         <main>{children}</main>
       </div>
 
-      <User />
+      {showUserCard ? null : <User />}
     </div>
   );
 }
