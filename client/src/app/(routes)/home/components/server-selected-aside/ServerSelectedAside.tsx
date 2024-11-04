@@ -33,7 +33,10 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
       )}
 
       {isOpenOptions === 3 && (
-        <CreateChannelModal handleOpenOptions={handleOpenOptions} />
+        <CreateChannelModal
+          handleOpenOptions={handleOpenOptions}
+          closeModal={() => closeModal()}
+        />
       )}
     </aside>
   );

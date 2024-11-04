@@ -7,7 +7,7 @@ import { ReactNode, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
-import { FriendsNav, HomeAside, ServerAside } from "./components";
+import { FriendsNav, HomeAside, ServerAside, User } from "./components";
 import { Separator } from "@/app/components";
 
 export default function HomeLayout({ children }: { children: ReactNode }) {
@@ -48,9 +48,7 @@ export default function HomeLayout({ children }: { children: ReactNode }) {
         <main>{children}</main>
       </div>
 
-      <div></div>
-
-      <div></div>
+      <User />
     </div>
   );
 }

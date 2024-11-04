@@ -36,6 +36,7 @@ export function CreateServerModal({ onCloseModal }: CreateServerModalProps) {
 
   return (
     <div
+      onClick={onCloseModal}
       aria-modal="true"
       aria-labelledby="create-server"
       role="dialog"

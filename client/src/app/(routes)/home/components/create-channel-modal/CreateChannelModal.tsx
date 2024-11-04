@@ -3,14 +3,17 @@
 import { Button, CloseModalButton } from "@/app/components";
 
 import { typeChannelOptions } from "@/app/consts/typeChannelOptions";
+
 import { useState } from "react";
 
 interface CreateChannelModalProps {
   handleOpenOptions: (option: number | null) => void;
+  closeModal: () => void;
 }
 
 export function CreateChannelModal({
   handleOpenOptions,
+  closeModal,
 }: CreateChannelModalProps) {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [selectedIcon, setSelectedIcon] = useState<JSX.Element | null>(null);
@@ -20,7 +23,10 @@ export function CreateChannelModal({
   };
 
   return (
-    <div className="bg-black inset-0 absolute flex items-center justify-center bg-opacity-60">
+    <div
+      onClick={closeModal}
+      className="bg-black inset-0 absolute flex items-center justify-center bg-opacity-60"
+    >
       <form className="flex flex-col gap-6 bg-[#2b2b30] w-[500px] min-h-[400px] rounded-[4px] px-4 py-4 relative overflow-hidden">
         <header className="flex items-center justify-between w-full">
           <h3 className="text-white text-xl font-semibold">Create channel</h3>

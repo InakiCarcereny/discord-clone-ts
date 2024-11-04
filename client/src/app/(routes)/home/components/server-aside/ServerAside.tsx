@@ -22,13 +22,19 @@ export function ServerAside() {
 
   const open = isOpen === "create-server";
 
+  const discordIcon =
+    pathname === "/home" ||
+    pathname === "/home/addFriend" ||
+    pathname === "/home/all" ||
+    pathname === "/home/pendent";
+
   return (
     <aside className="flex flex-col items-center gap-2 w-[70px] h-screen bg-[#1c1c1f] px-2 py-4">
       <Link
         href="/home"
         aria-label="go home"
         className={`bg-[#5865f2] flex items-center justify-center px-2 py-2 hover:rounded-[18px] duration-200 ${
-          pathname === "/home" ? "rounded-[18px]" : "rounded-3xl"
+          discordIcon ? "rounded-[18px]" : "rounded-3xl"
         }`}
       >
         <Discord className="w-8 h-8 text-white" />
