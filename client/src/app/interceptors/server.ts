@@ -10,5 +10,5 @@ export const createServerRequest = async (data: Server) =>
 export const deleteServerRequest = async (id: ServerId) =>
   axios.delete(`/server/${id}`);
 
-export const updateServerRequest = async (id: ServerId, data: Server) =>
+export const updateServerRequest = async (data: Server, id: ServerId) =>
   axios.put(`/server/${id}`, data);
