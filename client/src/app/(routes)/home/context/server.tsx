@@ -23,7 +23,7 @@ interface ServerContextType {
   errors: string[];
   deleteServer: (data: Server) => Promise<void>;
   createServer: (data: Server) => Promise<void>;
-  updateServer: (data: Server) => Promise<void>;
+  updateServer: (data: Server, serverId: string) => Promise<void>;
 }
 
 export const ServerContext = createContext<ServerContextType | undefined>(
@@ -86,13 +86,14 @@ export function ServerProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const updateServer = async (data: Server) => {
+  const updateServer = async (data: Server, serverId: string) => {
     try {
-      await updateServerRequest(data._id, data);
+      await updateServerRequest(data, serverId);
       setServer((prevState) =>
         prevState.map((server) => (server._id === data._id ? data : server))
       );
     } catch (err: unknown) {
+      console.log(err);
       if (err instanceof AxiosError && err.response) {
         setErrors(err.response.data);
       }
