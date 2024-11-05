@@ -7,7 +7,6 @@ export const serverSchema = z.object({
     })
     .max(50, {
       message: "Tittle must be at most 50 characters long",
-    })
-    .trim(),
+    }),
   logo: z.any(),
 });

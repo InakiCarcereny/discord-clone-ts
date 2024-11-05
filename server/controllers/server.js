@@ -77,6 +77,8 @@ export const createServer = async (req, res) => {
 
     const { tittle } = req.body;
 
+    console.log(req.body);
+
     const server = new Server({
       tittle,
       logo: {
@@ -106,13 +108,25 @@ export const createServer = async (req, res) => {
 export const updateServer = async (req, res) => {
   try {
     const { id } = req.params;
-    const { tittle, logo } = req.body;
+    const { tittle } = req.body;
+
+    console.log(req.file, "fiel");
+    console.log(req.body);
+
+    if (
+      !req.file ||
+      !["image/png", "image/jpeg", "image/jpg"].includes(req.file.mimetype)
+    ) {
+      return res.status(400).json(["Invalid file type"]);
+    }
 
     const updateServer = await Server.findByIdAndUpdate(
       id,
       {
         tittle,
-        logo,
+        logo: req.file
+          ? { data: req.file.buffer, contentType: req.file.mimetype }
+          : null,
       },
       {
         new: true,

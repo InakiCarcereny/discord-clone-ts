@@ -21,7 +21,12 @@ routes.get("/", getServers);
 
 routes.post("/", upload.single("logo"), isValidate(serverSchema), createServer);
 
-routes.put("/:id", isValidate(serverSchema), updateServer);
+routes.put(
+  "/:id",
+  upload.single("logo"),
+  isValidate(serverSchema),
+  updateServer
+);
 
 routes.delete("/:id", deleteServer);
 
