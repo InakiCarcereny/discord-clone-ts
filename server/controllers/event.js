@@ -70,6 +70,8 @@ export const createEvent = async (req, res) => {
       logo,
     } = req.body;
 
+    console.log(req.body, "file");
+
     const event = new Event({
       theme,
       dateInit,

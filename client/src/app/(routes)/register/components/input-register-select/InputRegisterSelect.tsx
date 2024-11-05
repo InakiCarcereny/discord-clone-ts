@@ -1,5 +1,6 @@
 interface InputRegisterSelectProps {
   number: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: any;
   value: string;
 }
