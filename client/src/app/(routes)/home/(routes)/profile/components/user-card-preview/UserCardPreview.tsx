@@ -1,3 +1,4 @@
+import { useAuth } from "@/app/context/auth";
 import { Dot } from "@/app/icons/Dot";
 
 interface UserCardPreviewProps {
@@ -18,6 +19,8 @@ export function UserCardPreview({
   avatar,
   watch,
 }: UserCardPreviewProps) {
+  const { user } = useAuth();
+
   return (
     <div className="flex flex-col gap-1">
       <h4 className="text-sm text-zinc-200 font-semibold">PREVIEW</h4>
@@ -47,9 +50,9 @@ export function UserCardPreview({
                 {watch("name")}
               </span>
               <div className="flex items-center text-white gap-1 text-xs font-semibold">
-                <p>{/* {user?.username} */}</p>
+                <p>{user?.username}</p>
                 <Dot className="text-white h-2 w-2" />
-                <p>{watch("pronouns")}</p>
+                <p>{watch("nickname")}</p>
               </div>
               <p className="text-white text-sm mt-2 whitespace-pre-line break-words">
                 {watch("description")}

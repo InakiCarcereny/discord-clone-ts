@@ -25,7 +25,7 @@ export function CreateChannelModal({
   return (
     <div
       onClick={closeModal}
-      className="bg-black inset-0 absolute flex items-center justify-center bg-opacity-60"
+      className="bg-black inset-0 absolute z-50 flex items-center justify-center bg-opacity-60"
     >
       <form className="flex flex-col gap-6 bg-[#2b2b30] w-[500px] min-h-[400px] rounded-[4px] px-4 py-4 relative overflow-hidden">
         <header className="flex items-center justify-between w-full">

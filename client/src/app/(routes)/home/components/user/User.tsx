@@ -4,11 +4,10 @@ import { useModal } from "@/app/hooks/useModal";
 
 import { userButtons } from "@/app/consts/userButtons";
 import { Photo } from "@/app/icons/Photo";
-import Link from "next/link";
-import { Pencil } from "@/app/icons/Pencil";
 import { useUserInfo } from "../../(routes)/profile/context/userInfo";
 
 import { convertToBase64 } from "@/app/utils/convertToBase64";
+import { UserCardModal } from "../user-card-modal/UserCardModal";
 
 export function User() {
   const { user } = useAuth();
@@ -56,21 +55,7 @@ export function User() {
         })}
       </div>
 
-      {open && (
-        <div className="w-[275px] h-[400px] absolute bottom-16 rounded-xl bg-gradient-to-t flex flex-col px-[6px] py-[6px] shadow-xl">
-          <div className="flex flex-col w-full h-full rounded-[8px] relative border border-zinc-900/20 overflow-hidden">
-            <Link
-              href="/home/profile"
-              className="bg-zinc-900 rounded-xl px-2 py-2 text-gray-400 font-semibold mb-2"
-            >
-              <div className="flex items-center gap-2 hover:bg-white/10 px-2 py-1 rounded-[4px]">
-                <Pencil />
-                Edit Profile
-              </div>
-            </Link>
-          </div>
-        </div>
-      )}
+      {open && <UserCardModal avatarBase64={avatarBase64} />}
     </div>
   );
 }

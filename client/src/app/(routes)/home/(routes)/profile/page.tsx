@@ -49,6 +49,7 @@ export default function Profile() {
   const primaryColorDark = darkenColor(primaryColor, 0.4);
 
   const onSubmit = handleSubmit(async (data) => {
+    console.log("enviado");
     const formData = new FormData();
 
     if (data.avatar) {
@@ -72,7 +73,8 @@ export default function Profile() {
       setValue("name", userInfo?.name);
       setValue("nickname", userInfo?.nickname);
       setValue("description", userInfo?.description);
-      // setValue("avatar", userInfo?.avatar);
+      setValue("avatar", userInfo?.avatar);
+      console.log(userInfo?.avatar);
       // setValue("banner", userInfo?.banner);
       setValue("primaryColor", userInfo?.primaryColor);
       setValue("secondaryColor", userInfo?.secondaryColor);
@@ -97,7 +99,7 @@ export default function Profile() {
           <Separator className="border border-zinc-600 rounded-full w-full max-w-[300px]" />
 
           <InputRegister
-            id="pronouns"
+            id="nickname"
             label="PRONOUNS"
             type="text"
             register={register}

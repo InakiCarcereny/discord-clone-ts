@@ -13,3 +13,4 @@ export * from "./server-options-button/ServerOptionsButton";
 export * from "./server-options-modal/ServerOptionsModal";
 export * from "./create-channel-modal/CreateChannelModal";
 export * from "./user/User";
+export * from "./user-card-modal/UserCardModal";
