@@ -66,6 +66,7 @@ export default function Profile() {
     formData.append("nickname", data.nickname);
 
     updateUserInfo(formData);
+    window.location.reload();
   });
 
   useEffect(() => {
@@ -92,7 +93,6 @@ export default function Profile() {
             label="SHOW NAME"
             type="text"
             register={register}
-            value={/^[a-zA-Z0-9]+$/}
             size="w-[300px] h-10"
           />
 
@@ -103,7 +103,6 @@ export default function Profile() {
             label="PRONOUNS"
             type="text"
             register={register}
-            value={/^[a-zA-Z0-9]+$/}
             size="w-[300px] h-10"
           />
 
