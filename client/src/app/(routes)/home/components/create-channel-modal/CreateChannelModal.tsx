@@ -6,28 +6,49 @@ import { typeChannelOptions } from "@/app/consts/typeChannelOptions";
 
 import { useState } from "react";
 
+import { useForm } from "react-hook-form";
+import { useChannel } from "../../context/channel";
+
 interface CreateChannelModalProps {
   handleOpenOptions: (option: number | null) => void;
   closeModal: () => void;
+  serverId: string;
+}
+
+interface FormValues {
+  name: string;
+  type: string;
 }
 
 export function CreateChannelModal({
   handleOpenOptions,
   closeModal,
+  serverId,
 }: CreateChannelModalProps) {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [selectedIcon, setSelectedIcon] = useState<JSX.Element | null>(null);
 
+  const { register, handleSubmit, watch } = useForm<FormValues>();
+
+  const { createChannel } = useChannel();
+
   const handleSelectOption = (option: number) => {
     setSelectedOption(option);
   };
+
+  const onSubmit = handleSubmit(async (data) => {
+    createChannel(data, serverId);
+  });
 
   return (
     <div
       onClick={closeModal}
       className="bg-black inset-0 absolute z-50 flex items-center justify-center bg-opacity-60"
     >
-      <form className="flex flex-col gap-6 bg-[#2b2b30] w-[500px] min-h-[400px] rounded-[4px] px-4 py-4 relative overflow-hidden">
+      <form
+        onSubmit={onSubmit}
+        className="flex flex-col gap-6 bg-[#2b2b30] w-[500px] min-h-[400px] rounded-[4px] px-4 py-4 relative overflow-hidden"
+      >
         <header className="flex items-center justify-between w-full">
           <h3 className="text-white text-xl font-semibold">Create channel</h3>
           <CloseModalButton onCloseModal={() => handleOpenOptions(null)} />
@@ -66,6 +87,7 @@ export function CreateChannelModal({
                     checked={selectedOption === option.id}
                     type="checkbox"
                     className="w-5 h-5 cursor-pointer"
+                    // {...register("text")}
                   />
                 </li>
               );
@@ -87,12 +109,17 @@ export function CreateChannelModal({
               id="channelName"
               className="focus:outline-none text-sm placeholder:text-zinc-600 w-full bg-transparent"
               placeholder="new-channel"
+              {...register("name")}
             />
           </div>
         </div>
 
         <footer className="flex items-center justify-between w-full h-[100px] bg-[#212124] -mx-4 -mb-4 px-4">
-          <button className="text-zinc-300 font-semibold text-sm">
+          <button
+            onClick={() => handleOpenOptions(null)}
+            className="text-zinc-300 font-semibold text-sm"
+            type="button"
+          >
             Cancel
           </button>
           <Button label="Create channel" type="submit" size="text-sm" />

@@ -23,7 +23,7 @@ export function User() {
     : null;
 
   return (
-    <div className="absolute bottom-0 left-[70px] w-[240px] h-[60px] bg-[#202024] border-t border-[#33353b] flex items-center justify-between px-2">
+    <div className="absolute bottom-0 left-[70px] w-[240px] h-[60px] bg-[#202024] border-t border-[#33353b] flex items-center justify-between px-1">
       <button
         onClick={() => toggleModal("user-modal")}
         className="text-white text-xs hover:bg-zinc-600 rounded-[4px] px-1 py-1 flex items-center gap-2"
@@ -34,7 +34,7 @@ export function User() {
           <Photo className="h-6 w-6 rounded-full" />
         )}
         <div className="flex flex-col items-start">
-          <span className="text-sm text-white font-semibold">
+          <span className="text-xs text-white font-semibold">
             {userInfo?.name}
           </span>
           <span className="text-xs text-gray-400 font-semibold">

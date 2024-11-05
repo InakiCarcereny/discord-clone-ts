@@ -7,6 +7,7 @@ import Image from "next/image";
 
 import { CreateServerModalProps } from "@/app/models/create-server-modal";
 import { useState } from "react";
+import { DefaultServer } from "@/app/icons/DefaultServer";
 
 export function SearchServerModal({ onCloseModal }: CreateServerModalProps) {
   const [search, setSearch] = useState("");
@@ -18,7 +19,7 @@ export function SearchServerModal({ onCloseModal }: CreateServerModalProps) {
   });
 
   return (
-    <div className="inset-0 absolute flex items-center justify-center bg-black bg-opacity-60 focus:outline-none">
+    <div className="inset-0 absolute z-50 flex items-center justify-center bg-black bg-opacity-60 focus:outline-none">
       <div className="bg-[#212124] w-[600px] h-[450px] rounded-[8px] px-4 py-4 flex flex-col gap-4 overflow-y-auto over relative">
         <input
           type="text"
@@ -42,13 +43,17 @@ export function SearchServerModal({ onCloseModal }: CreateServerModalProps) {
                   href={`/home/${server._id}`}
                   className="flex items-center gap-4"
                 >
-                  <Image
-                    width={10}
-                    height={10}
-                    src={logoUrl}
-                    alt={server.tittle}
-                    className="w-10 h-10 rounded-full"
-                  />
+                  {logoUrl ? (
+                    <Image
+                      width={10}
+                      height={10}
+                      src={logoUrl}
+                      alt={server.tittle}
+                      className="w-10 h-10 rounded-full"
+                    />
+                  ) : (
+                    <DefaultServer className="w-10 h-10 rounded-full" />
+                  )}
                   <span className="text-sm font-semibold">{server.tittle}</span>
                 </Link>
               </li>

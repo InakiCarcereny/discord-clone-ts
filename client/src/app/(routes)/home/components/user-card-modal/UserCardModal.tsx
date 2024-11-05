@@ -17,7 +17,7 @@ export function UserCardModal({ avatarBase64 }: UserCardModalProps) {
 
   const secondaryColor = userInfo?.secondaryColor;
 
-  const primaryColor = userInfo?.primaryColor;
+  const primaryColor = userInfo ? userInfo.primaryColor : "#5865f2";
 
   const primaryColorDark = darkenColor(primaryColor, 0.4);
 
@@ -53,11 +53,11 @@ export function UserCardModal({ avatarBase64 }: UserCardModalProps) {
                 {userInfo?.name}
               </span>
               <div className="flex items-center gap-1">
-                <p className="text-sm text-white font-semibold">
+                <p className="text-xs text-white font-semibold">
                   {user?.username}
                 </p>
                 <Dot className="text-white h-2 w-2" />
-                <p className="text-sm text-white font-semibold">
+                <p className="text-xs text-white font-semibold">
                   {userInfo?.nickname}
                 </p>
               </div>

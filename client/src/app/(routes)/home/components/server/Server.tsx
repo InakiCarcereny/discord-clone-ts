@@ -7,6 +7,7 @@ import Link from "next/link";
 import { World } from "@/app/icons/World";
 import Image from "next/image";
 import { convertToBase64 } from "@/app/utils/convertToBase64";
+import { DefaultServer } from "@/app/icons/DefaultServer";
 
 interface ServerProps {
   id: string;
@@ -23,15 +24,19 @@ export function Server({ id, name, logo }: ServerProps) {
     return (
       <li className="group flex items-center">
         <Link href={`/home/${id}`}>
-          <Image
-            width={12}
-            height={12}
-            src={logoUrl}
-            alt={name}
-            className={`${
-              pathname.startsWith(`/home/${id}`) ? "rounded-[15px]" : ""
-            } w-12 h-12 duration-200 rounded-3xl hover:rounded-[15px] `}
-          />
+          {logoUrl ? (
+            <Image
+              width={12}
+              height={12}
+              src={logoUrl}
+              alt={name}
+              className={`${
+                pathname.startsWith(`/home/${id}`) ? "rounded-[15px]" : ""
+              } w-12 h-12 duration-200 rounded-3xl hover:rounded-[15px] `}
+            />
+          ) : (
+            <DefaultServer className="w-12 h-12 duration-200 rounded-3xl hover:rounded-[15px]" />
+          )}
         </Link>
         <div
           className={`${
