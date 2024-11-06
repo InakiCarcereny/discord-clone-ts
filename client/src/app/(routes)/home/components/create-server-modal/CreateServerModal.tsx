@@ -10,6 +10,7 @@ import { CloseModalButton } from "@/app/components";
 
 import { Logo } from "@/app/models/logo.d";
 import { useServer } from "../../context/server";
+import { UploadPhoto } from "@/app/icons/UploadPhoto";
 
 interface FormValues {
   logo: Logo;
@@ -51,12 +52,15 @@ export function CreateServerModal({ onCloseModal }: CreateServerModalProps) {
 
           <FileInput register={register} logo={logo} />
 
+          <div className="absolute right-[180px] top-[140px] bg-[#5865f2] rounded-full px-1 py-1">
+            <UploadPhoto className="text-white h-6 w-6" />
+          </div>
+
           <InputRegister
             label="NAME OF THE SERVER"
             type="text"
             id="tittle"
             required="Tittle is required"
-            value={/^[a-zA-Z0-9]+$/}
             register={register}
             placeholder={`Server of ${user?.username}`}
           />
