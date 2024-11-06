@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { FileInput } from "@/app/(routes)/home/components";
 import { useServer } from "@/app/(routes)/home/context/server";
 import { useEffect } from "react";
+import { UploadPhoto } from "@/app/icons/UploadPhoto";
 
 interface ServerSettingsProps {
   handleOpenOptions: (option: number | null) => void;
@@ -60,12 +61,15 @@ export function ServerSettings({
         <div className="flex flex-col gap-1">
           <FileInput register={register} logo={logo} />
 
+          <div className="absolute right-[150px] top-[70px] bg-[#5865f2] rounded-full px-1 py-1">
+            <UploadPhoto className="text-white h-6 w-6" />
+          </div>
+
           <InputRegister
             label="SERVER NAME"
             type="text"
             id="tittle"
             required="Tittle is required"
-            value={/^[a-zA-Z0-9]+$/}
             register={register}
           />
         </div>

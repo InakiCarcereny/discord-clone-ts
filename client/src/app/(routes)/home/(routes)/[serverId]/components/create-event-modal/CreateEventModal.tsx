@@ -1,4 +1,5 @@
 "use client";
+
 import { useForm } from "react-hook-form";
 
 import { InputRegister } from "@/app/(routes)/register/components";
