@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { ServerSelectedAside } from "../../components";
+import { Test } from "./components/test/Test";
 
 export default async function ServerLayout({
   children,
@@ -15,8 +16,8 @@ export default async function ServerLayout({
         <ServerSelectedAside serverId={serverId} />
       </div>
       <div className="flex-grow -my-3">{children}</div>
-      <div className="h-screen w-[240px] bg-[#27282c] flex flex-col gap-2 -mx-6 -my-3">
-        hola
+      <div className="h-screen w-[240px] bg-[#27282c] flex flex-col gap-2 -mx-6 -my-3 px-4 py-4">
+        <Test serverId={serverId} />
       </div>
     </div>
   );

@@ -13,10 +13,11 @@ import { Server } from "@/app/models/server";
 import {
   createServerRequest,
   deleteServerRequest,
+  getServerRequest,
   getServersRequest,
   updateServerRequest,
 } from "@/app/interceptors/server";
-import { AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 
 interface ServerContextType {
   server: Server[];
@@ -24,6 +25,7 @@ interface ServerContextType {
   deleteServer: (data: Server) => Promise<void>;
   createServer: (data: Server) => Promise<void>;
   updateServer: (data: Server, serverId: string) => Promise<void>;
+  isOwner: (serverId: string) => Promise<AxiosResponse<Server> | undefined>;
 }
 
 export const ServerContext = createContext<ServerContextType | undefined>(
@@ -100,9 +102,27 @@ export function ServerProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const isOwner = async (
+    serverId: string
+  ): Promise<AxiosResponse<Server> | undefined> => {
+    try {
+      const res = await getServerRequest(serverId);
+      return res;
+    } catch (err: unknown) {
+      console.log(err);
+    }
+  };
+
   return (
     <ServerContext.Provider
-      value={{ server, errors, deleteServer, createServer, updateServer }}
+      value={{
+        server,
+        errors,
+        deleteServer,
+        createServer,
+        updateServer,
+        isOwner,
+      }}
     >
       {children}
     </ServerContext.Provider>
