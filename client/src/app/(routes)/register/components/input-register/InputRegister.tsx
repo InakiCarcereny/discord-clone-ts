@@ -6,7 +6,7 @@ interface InputRegisterProps {
   type: string;
   id: string;
   required?: string;
-  value: RegExp;
+  value?: RegExp;
   message?: string;
   error?: Record<string, unknown> | undefined;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -74,9 +74,6 @@ export default function Profile() {
       setValue("name", userInfo?.name);
       setValue("nickname", userInfo?.nickname);
       setValue("description", userInfo?.description);
-      setValue("avatar", userInfo?.avatar);
-      console.log(userInfo?.avatar);
-      // setValue("banner", userInfo?.banner);
       setValue("primaryColor", userInfo?.primaryColor);
       setValue("secondaryColor", userInfo?.secondaryColor);
     }
