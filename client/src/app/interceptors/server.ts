@@ -2,6 +2,9 @@ import axios from "./axios";
 
 import { Server, ServerId } from "@/app/models/server";
 
+export const getServerRequest = async (id: ServerId) =>
+  axios.get(`/server/${id}`);
+
 export const getServersRequest = async () => axios.get("/server");
 
 export const createServerRequest = async (data: Server) =>
