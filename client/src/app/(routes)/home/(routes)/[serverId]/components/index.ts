@@ -6,3 +6,6 @@ export * from "./channel-name-input/ChannelNameInput";
 export * from "./create-channel-modal-footer/CreateChannelModalFooter";
 export * from "./channel-type-option/ChannelTypeOption";
 export * from "./server-selected-header/ServerSelectedHeader";
+export * from "./server-selected-search-bar/ServerSelectedSearchBar";
+export * from "./channel-type-text/ChannelTypeText";
+export * from "./channel-type-voice/ChannelTypeVoice";

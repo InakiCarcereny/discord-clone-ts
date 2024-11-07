@@ -33,7 +33,7 @@ export function CreateEventModal({
   const { createEvent } = useEvent();
 
   const onSubmit = handleSubmit(async (data) => {
-    // console.log(data);
+    console.log(data);
     createEvent(data, serverId);
   });
 

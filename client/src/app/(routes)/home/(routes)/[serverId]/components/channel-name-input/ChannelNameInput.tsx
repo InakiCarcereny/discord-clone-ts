@@ -9,7 +9,7 @@ export function ChannelNameInput({
   selectedIcon,
 }: ChannelNameInputProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 px-4">
       <label htmlFor="channelName" className="text-white font-semibold text-xs">
         CHANNEL NAME
       </label>

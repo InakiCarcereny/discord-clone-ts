@@ -3,9 +3,8 @@ interface ChannelTypeOptionProps {
   icon: JSX.Element;
   description: string;
   label: string;
-  handleSelectOption: (option: number) => void;
+  handleSelectOption: (option: number, label: string) => void;
   selectedOption: number | null;
-  setSelectedIcon: (icon: JSX.Element) => void;
 }
 
 export function ChannelTypeOption({
@@ -15,14 +14,10 @@ export function ChannelTypeOption({
   label,
   handleSelectOption,
   selectedOption,
-  setSelectedIcon,
 }: ChannelTypeOptionProps) {
   return (
     <li
-      onClick={() => {
-        handleSelectOption(id);
-        setSelectedIcon(icon);
-      }}
+      onClick={() => handleSelectOption(id, label)}
       key={id}
       className={`flex items-center justify-between gap-4 hover:bg-[#252529] rounded-[4px] px-2 py-1 cursor-pointer ${
         selectedOption === id ? "bg-zinc-700" : ""
@@ -36,11 +31,10 @@ export function ChannelTypeOption({
         </div>
       </div>
       <input
-        onChange={() => handleSelectOption(id)}
         checked={selectedOption === id}
         type="checkbox"
         className="w-5 h-5 cursor-pointer"
-        // {...register("text")}
+        readOnly
       />
     </li>
   );

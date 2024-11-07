@@ -14,13 +14,18 @@ import { Calendar } from "@/app/icons/Calendar";
 import { ArrowDown } from "@/app/icons/ArrowDown";
 import { PlusWithoutBg } from "@/app/icons/PlusWithoutBg";
 import { useChannel } from "@/app/(routes)/home/context/channel";
-import { Settings } from "@/app/icons/Settings";
-import { Hash } from "@/app/icons/Hash";
-import { useEffect } from "react";
+
+import { useEffect, useState } from "react";
 import { useGetFirstChannel } from "@/app/hooks/useGetFirstChannel";
+import { ChannelTypeText } from "../channel-type-text/ChannelTypeText";
+import { ChannelTypeVoice } from "../channel-type-voice/ChannelTypeVoice";
+import { ArrowRight } from "@/app/icons/ArrowRight";
 
 export function ServerSelectedAside({ serverId }: { serverId: string }) {
-  const { toggleModal, isOpen, closeModal } = useModal();
+  const [textVisible, setTextVisible] = useState(true);
+  const [voiceVisible, setVoiceVisible] = useState(true);
+
+  const { toggleModal, isOpen, closeModal, openModal } = useModal();
   const { isOpenOptions, handleOpenOptions } = useModalOptions();
   const { channels, getChannels } = useChannel();
 
@@ -38,6 +43,22 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
     getChannels(serverId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleTextVisibilityChange = () => {
+    setTextVisible(!textVisible);
+  };
+
+  const handleVoiceVisibilityChange = () => {
+    setVoiceVisible(!voiceVisible);
+  };
+
+  const channelTypeText = channels.filter(
+    (channel) => channel.type[0] === "Text"
+  );
+
+  const channelTypeVoice = channels.filter(
+    (channel) => channel.type[0] === "Voice"
+  );
 
   return (
     <aside className="h-screen w-[240px] bg-[#27282c] flex flex-col">
@@ -59,11 +80,18 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
         <Separator className="border border-zinc-700 rounded-full w-full" />
 
         <article className="flex flex-col gap-2">
-          <div className="flex items-center justify-between group cursor-pointer">
+          <div
+            onClick={handleTextVisibilityChange}
+            className="flex items-center justify-between group cursor-pointer"
+          >
             <div className="flex items-center gap-2">
-              <button>
-                <ArrowDown className="text-gray-400 h-4 w-4" />
-              </button>
+              <span>
+                {textVisible ? (
+                  <ArrowDown className="text-gray-400 h-4 w-4" />
+                ) : (
+                  <ArrowRight className="text-gray-400 h-4 w-4" />
+                )}
+              </span>
               <span className="text-xs font-semibold text-gray-400 group-hover:text-white">
                 TEXT CHANNELS
               </span>
@@ -73,32 +101,60 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
             </button>
           </div>
 
-          <ul className="flex flex-col gap-2">
-            {channels.map((channel) => {
-              return (
-                <li
-                  key={channel._id}
-                  className={`flex items-center justify-between px-2 py-1 rounded-[4px] hover:bg-[#2f3136] group ${
-                    isMatching ? "bg-zinc-700" : ""
-                  }`}
-                >
-                  <div className="flex items-center gap-2">
-                    <Hash className="text-gray-400 w-5 h-5" />
-                    <span
-                      className={`group-hover:text-white font-semibold text-gray-400 text-sm ${
-                        isMatching ? "text-white" : ""
-                      }`}
-                    >
-                      {channel.name}
-                    </span>
-                  </div>
-                  <button className="group-hover:block hidden">
-                    <Settings className="text-gray-400 w-5 h-5" />
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+          {textVisible && (
+            <ul className="flex flex-col">
+              {channelTypeText.map((channel) => {
+                return (
+                  <ChannelTypeText
+                    key={channel._id}
+                    id={channel._id}
+                    name={channel.name}
+                    isMatching={isMatching}
+                    openModal={() => openModal("text")}
+                    isOpen={isOpen}
+                  />
+                );
+              })}
+            </ul>
+          )}
+        </article>
+
+        <article className="flex flex-col gap-2">
+          <div className="flex items-center justify-between group cursor-pointer">
+            <div
+              onClick={handleVoiceVisibilityChange}
+              className="flex items-center gap-2"
+            >
+              <span>
+                {voiceVisible ? (
+                  <ArrowDown className="text-gray-400 h-4 w-4" />
+                ) : (
+                  <ArrowRight className="text-gray-400 h-4 w-4" />
+                )}
+              </span>
+              <span className="text-xs font-semibold text-gray-400 group-hover:text-white">
+                VOICE CHANNELS
+              </span>
+            </div>
+            <button>
+              <PlusWithoutBg className="text-gray-400 h-4 w-4" />
+            </button>
+          </div>
+
+          {voiceVisible && (
+            <ul className="flex flex-col">
+              {channelTypeVoice.map((channel) => {
+                return (
+                  <ChannelTypeVoice
+                    key={channel._id}
+                    id={channel._id}
+                    name={channel.name}
+                    isMatching={isMatching}
+                  />
+                );
+              })}
+            </ul>
+          )}
         </article>
       </nav>
 
