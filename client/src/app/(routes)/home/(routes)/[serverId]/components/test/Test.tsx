@@ -5,7 +5,7 @@ import { useUserInfo } from "../../../profile/context/userInfo";
 import { Crown } from "@/app/icons/Crown";
 import { convertToBase64 } from "@/app/utils/convertToBase64";
 
-export function Test({ serverId }: { serverId: string }) {
+export function ServerMebmers({ serverId }: { serverId: string }) {
   const { owner } = useIsOwner(serverId);
 
   const { userInfo } = useUserInfo();

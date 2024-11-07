@@ -32,16 +32,21 @@ export function CreateChannelModal({
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [selectedIcon, setSelectedIcon] = useState<JSX.Element | null>(null);
 
-  const { register, handleSubmit } = useForm<FormValues>();
+  const { register, handleSubmit, setValue } = useForm<FormValues>();
 
   const { createChannel } = useChannel();
 
-  const handleSelectOption = (option: number) => {
+  const handleSelectOption = (option: number, label: string) => {
     setSelectedOption(option);
+    setValue("type", label);
+    setSelectedIcon(
+      typeChannelOptions.find((opt) => opt.id === option)?.icon || null
+    );
   };
 
   const onSubmit = handleSubmit(async (data) => {
     createChannel(data, serverId);
+    closeModal();
   });
 
   return (
@@ -52,8 +57,8 @@ export function CreateChannelModal({
       <div className="flex flex-col gap-4 overflow-hidden relative bg-[#2b2b30] w-[500px] min-h-[400px] rounded-[4px]">
         <CreateChannelModalHeader handleOpenOptions={handleOpenOptions} />
 
-        <form onSubmit={onSubmit} className="flex flex-col gap-6 px-4">
-          <div className="flex flex-col gap-6">
+        <form onSubmit={onSubmit} className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4 px-4">
             <span className="text-xs text-zinc-300 font-semibold">
               CHANNEL TYPE
             </span>
@@ -68,7 +73,6 @@ export function CreateChannelModal({
                     label={option.label}
                     handleSelectOption={handleSelectOption}
                     selectedOption={selectedOption}
-                    setSelectedIcon={setSelectedIcon}
                   />
                 );
               })}
@@ -76,9 +80,8 @@ export function CreateChannelModal({
           </div>
 
           <ChannelNameInput register={register} selectedIcon={selectedIcon} />
+          <CreateChannelModalFooter handleOpenOptions={handleOpenOptions} />
         </form>
-
-        <CreateChannelModalFooter handleOpenOptions={handleOpenOptions} />
       </div>
     </div>
   );
