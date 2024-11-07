@@ -90,13 +90,20 @@ export const createServer = async (req, res) => {
 
     const savedServer = await server.save();
 
-    const defaultChannel = new Channel({
+    const defaultChannelText = new Channel({
       name: "General",
-      type: "text",
+      type: "Text",
       server: savedServer._id,
     });
 
-    await defaultChannel.save();
+    const defaultChannelVoice = new Channel({
+      name: "General",
+      type: "Voice",
+      server: savedServer._id,
+    });
+
+    await defaultChannelText.save();
+    await defaultChannelVoice.save();
 
     res.status(201).json(savedServer);
   } catch (err) {
