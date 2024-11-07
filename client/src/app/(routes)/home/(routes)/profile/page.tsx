@@ -80,7 +80,7 @@ export default function Profile() {
   }, [setValue, userInfo]);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 px-10 py-4">
       <HeaderProfile />
 
       <div className="flex gap-8">

@@ -35,10 +35,10 @@ export default function HomeLayout({ children }: { children: ReactNode }) {
         {showHomeLayout && <HomeAside />}
       </div>
 
-      <div className="flex flex-col gap-2 px-6 py-3 w-full h-full">
+      <div className="flex flex-col gap-2 w-full h-full">
         {showHomeLayout && <FriendsNav />}
         {showHomeLayout && (
-          <Separator className="border border-[#2b2c31] rounded-full -mx-6" />
+          <Separator className="border border-[#2b2c31] rounded-full" />
         )}
         <main>{children}</main>
       </div>

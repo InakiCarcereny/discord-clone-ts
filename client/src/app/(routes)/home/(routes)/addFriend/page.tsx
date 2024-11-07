@@ -2,7 +2,7 @@ import { Button } from "@/app/components";
 
 export default function AddFriend() {
   return (
-    <>
+    <div className="flex flex-col px-6">
       <header className="flex flex-col gap-2 mt-4">
         <h1 className="text-white font-semibold">ADD FRIEND</h1>
         <p className="text-xs text-zinc-300 font-semibold">
@@ -18,6 +18,6 @@ export default function AddFriend() {
         />
         <Button label="Add friend" type="submit" size="w-[150px]" />
       </div>
-    </>
+    </div>
   );
 }

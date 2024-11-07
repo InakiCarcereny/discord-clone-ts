@@ -34,10 +34,10 @@ export function User() {
           <Photo className="h-6 w-6 rounded-full" />
         )}
         <div className="flex flex-col items-start">
-          <span className="text-xs text-white font-semibold">
+          <span className="text-xs text-white font-semibold truncate">
             {userInfo?.name}
           </span>
-          <span className="text-xs text-gray-400 font-semibold">
+          <span className="text-xs text-gray-400 font-semibold truncate">
             {user?.username}
           </span>
         </div>

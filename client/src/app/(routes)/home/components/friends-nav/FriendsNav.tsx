@@ -12,7 +12,7 @@ export function FriendsNav() {
   const pathname = usePathname();
 
   return (
-    <header className="w-full flex items-center justify-between">
+    <header className="w-full flex items-center justify-between px-6 pt-3">
       <nav>
         <ul className="flex items-center gap-3">
           <li className="flex items-center gap-2">

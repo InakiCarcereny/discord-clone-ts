@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 
-import { Server } from "@/app/models/server";
+import { Server, ServerId } from "@/app/models/server";
 
 import {
   createServerRequest,
@@ -22,10 +22,10 @@ import { AxiosError, AxiosResponse } from "axios";
 interface ServerContextType {
   server: Server[];
   errors: string[];
-  deleteServer: (data: Server) => Promise<void>;
+  deleteServer: (data: ServerId) => Promise<void>;
   createServer: (data: Server) => Promise<void>;
-  updateServer: (data: Server, serverId: string) => Promise<void>;
-  isOwner: (serverId: string) => Promise<AxiosResponse<Server> | undefined>;
+  updateServer: (data: Server, serverId: ServerId) => Promise<void>;
+  isOwner: (serverId: ServerId) => Promise<AxiosResponse<Server> | undefined>;
 }
 
 export const ServerContext = createContext<ServerContextType | undefined>(
@@ -73,12 +73,12 @@ export function ServerProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const deleteServer = async (data: Server) => {
+  const deleteServer = async (data: ServerId) => {
     try {
-      const res = await deleteServerRequest(data._id);
+      const res = await deleteServerRequest(data);
       if (res.status === 200) {
         setServer((prevState) =>
-          prevState.filter((server) => server._id !== data._id)
+          prevState.filter((server) => server._id !== data)
         );
       }
     } catch (err: unknown) {
