@@ -1,3 +1,5 @@
+"use client";
+
 import { InputRegister } from "@/app/(routes)/register/components";
 import { CloseModalButton } from "@/app/components";
 

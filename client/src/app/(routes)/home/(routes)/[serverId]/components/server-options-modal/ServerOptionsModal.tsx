@@ -1,17 +1,25 @@
+import { useServer } from "@/app/(routes)/home/context/server";
 import { serverOption } from "@/app/consts/serverOptions";
+import { useIsOwner } from "@/app/hooks/useIsOwner";
 import { OptionId } from "@/app/hooks/useModalOptions";
 
 interface ServerOptionsModalProps {
   closeModal: () => void;
   handleOpenOptions: (option: OptionId) => void;
+  serverId: string;
 }
 
 export function ServerOptionsModal({
   closeModal,
   handleOpenOptions,
+  serverId,
 }: ServerOptionsModalProps) {
+  const { owner } = useIsOwner(serverId);
+
+  const { deleteServer } = useServer();
+
   return (
-    <div className="bg-zinc-950 w-[225px] h-[220px] flex flex-col mx-auto mt-2 rounded-[4px] px-2 py-2">
+    <div className="bg-zinc-950 w-[225px] h-[220px] flex flex-col rounded-[4px] px-2 py-2 absolute top-16 left-[78px]">
       <ul className="flex flex-col gap-4 w-full">
         {serverOption.map((option, index) => {
           return (
@@ -25,6 +33,12 @@ export function ServerOptionsModal({
                 onClick={() => {
                   handleOpenOptions(option.id);
                   closeModal();
+                  if (index === 4) {
+                    if (owner) {
+                      deleteServer(serverId);
+                      window.location.reload();
+                    }
+                  }
                 }}
                 className="flex items-center justify-between w-full"
               >

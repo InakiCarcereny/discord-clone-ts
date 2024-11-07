@@ -23,7 +23,9 @@ export function ServerOptionsButton({
       className="w-full h-[52px] duration-200 hover:bg-[#323338] flex items-center justify-between text-zinc-300 font-semibold text-sm px-4 truncate"
     >
       {filteredServers.map((server) => (
-        <span key={server._id}>{server.tittle}</span>
+        <span className="truncate" key={server._id}>
+          {server.tittle}
+        </span>
       ))}
       {open ? (
         <CrossWithoutBg className="w-5 h-5 text-zinc-300" />

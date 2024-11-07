@@ -12,7 +12,7 @@ export function Test({ serverId }: { serverId: string }) {
 
   const avatarBase64 = userInfo?.avatar
     ? convertToBase64(userInfo.avatar)
-    : null;
+    : undefined;
 
   return (
     <div className="flex items-center gap-4 hover:bg-white/10 duration-200 rounded-[4px] px-2 py-1 cursor-pointer">

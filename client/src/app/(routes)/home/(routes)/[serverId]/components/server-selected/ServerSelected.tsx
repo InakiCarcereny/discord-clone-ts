@@ -1,17 +1,9 @@
 "use client";
 
-import { useServer } from "@/app/(routes)/home/context/server";
+import { useGetFirstChannel } from "@/app/hooks/useGetFirstChannel";
 
 export function ServerSelected({ serverId }: { serverId: string }) {
-  const { server } = useServer();
+  const { firstChannel } = useGetFirstChannel(serverId);
 
-  const filteredServer = server.filter((server) => server._id === serverId);
-
-  return (
-    <div className="">
-      {filteredServer.map((server) => {
-        return <div key={server._id}>{server.tittle}</div>;
-      })}
-    </div>
-  );
+  return <div>{firstChannel ? <div>{firstChannel.name}</div> : null}</div>;
 }
