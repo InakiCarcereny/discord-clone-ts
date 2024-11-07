@@ -10,6 +10,5 @@ export const channelSchema = z.object({
     })
     .max(25, {
       message: "Name must be at most 50 characters long",
-    })
-    .trim(),
+    }),
 });

@@ -71,10 +71,11 @@ export const createChannel = async (req, res) => {
       return res.status(403).json(["Forbidden"]);
     }
 
-    const { name } = req.body;
+    const { name, type } = req.body;
 
     const channel = new Channel({
       name,
+      type,
       server: serverFind._id,
     });
 
@@ -82,6 +83,7 @@ export const createChannel = async (req, res) => {
 
     res.status(201).json(newChannel);
   } catch (err) {
+    console.log(err);
     res.status(500).json(["Error creating channel"]);
   }
 };
