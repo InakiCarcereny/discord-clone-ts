@@ -49,6 +49,7 @@ export function ChannelProvider({ children }: { children: ReactNode }) {
   const createChannel = async (data: Channel, id: Id): Promise<void> => {
     try {
       const res = await createChannelRequest(data, id);
+      console.log(res);
       setChannels((prevState: Channel[]): Channel[] => [
         ...prevState,
         res.data,
