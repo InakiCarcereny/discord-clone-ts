@@ -14,7 +14,6 @@ export function useIsOwner(serverId: string) {
   useEffect(() => {
     async function isOwnerFunction() {
       const res = await isOwner(serverId);
-      console.log(res);
       if (res && res.data.user.toString() === user?.id) {
         setOwner(true);
       } else {

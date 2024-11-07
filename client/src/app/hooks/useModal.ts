@@ -2,14 +2,16 @@
 
 import { useEffect, useState } from "react";
 
-export function useModal() {
-  const [isOpen, setIsOpen] = useState<string | boolean | null>(null);
+type Modal = string;
 
-  const openModal = (modal: string) => setIsOpen(modal);
+export function useModal() {
+  const [isOpen, setIsOpen] = useState<string | boolean>(false);
+
+  const openModal = (modal: Modal) => setIsOpen(modal);
 
   const closeModal = () => setIsOpen(false);
 
-  const toggleModal = (modal: string) => {
+  const toggleModal = (modal: Modal) => {
     if (isOpen) {
       closeModal();
     } else {
