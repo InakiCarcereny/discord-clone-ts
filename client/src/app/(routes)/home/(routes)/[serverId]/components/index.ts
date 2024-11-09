@@ -9,3 +9,4 @@ export * from "./server-selected-header/ServerSelectedHeader";
 export * from "./server-selected-search-bar/ServerSelectedSearchBar";
 export * from "./channel-type-text/ChannelTypeText";
 export * from "./channel-type-voice/ChannelTypeVoice";
+export * from "./emoji-picker/EmojiPicker";

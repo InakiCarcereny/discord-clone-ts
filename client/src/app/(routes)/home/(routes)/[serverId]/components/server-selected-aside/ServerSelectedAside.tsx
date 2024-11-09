@@ -79,7 +79,7 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
 
         <Separator className="border border-zinc-700 rounded-full w-full" />
 
-        <article className="flex flex-col gap-2">
+        <section className="flex flex-col gap-2">
           <div
             onClick={handleTextVisibilityChange}
             className="flex items-center justify-between group cursor-pointer"
@@ -111,15 +111,16 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
                     name={channel.name}
                     isMatching={isMatching}
                     openModal={() => openModal("text")}
+                    closeModal={() => closeModal()}
                     isOpen={isOpen}
                   />
                 );
               })}
             </ul>
           )}
-        </article>
+        </section>
 
-        <article className="flex flex-col gap-2">
+        <section className="flex flex-col gap-2">
           <div className="flex items-center justify-between group cursor-pointer">
             <div
               onClick={handleVoiceVisibilityChange}
@@ -155,7 +156,7 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
               })}
             </ul>
           )}
-        </article>
+        </section>
       </nav>
 
       {open && (

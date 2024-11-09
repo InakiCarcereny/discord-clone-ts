@@ -4,6 +4,7 @@ import { useGetFirstChannel } from "@/app/hooks/useGetFirstChannel";
 import { Hash } from "@/app/icons/Hash";
 import { Pencil } from "@/app/icons/Pencil";
 import { PlusWithBg } from "@/app/icons/PlusWithBg";
+import { EmojiPicker } from "../emoji-picker/EmojiPicker";
 
 export function ServerSelected({ serverId }: { serverId: string }) {
   const { firstChannel } = useGetFirstChannel(serverId);
@@ -25,7 +26,7 @@ export function ServerSelected({ serverId }: { serverId: string }) {
         </span>
       </div>
       <div className="bg-zinc-700/60 w-full rounded-[4px] px-4 py-2 flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full">
           <button className="text-gray-400 hover:text-white">
             <PlusWithBg className="h-5 w-5" />
           </button>
@@ -35,7 +36,7 @@ export function ServerSelected({ serverId }: { serverId: string }) {
             placeholder={`Send message to ${firstChannel?.name}`}
           />
         </div>
-        emoji
+        <EmojiPicker onChange={(emoji: string) => console.log(emoji)} />
       </div>
     </div>
   );
