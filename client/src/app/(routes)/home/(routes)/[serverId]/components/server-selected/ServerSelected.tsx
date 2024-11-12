@@ -33,7 +33,7 @@ export function ServerSelected({ serverId }: { serverId: string }) {
           <input
             type="text"
             className="bg-transparent focus:outline-none w-full placeholder:text-sm placeholder:text-zinc-500 text-white text-sm"
-            placeholder={`Send message to ${firstChannel?.name}`}
+            placeholder={`Send message to #${firstChannel?.name}`}
           />
         </div>
         <EmojiPicker onChange={(emoji: string) => console.log(emoji)} />

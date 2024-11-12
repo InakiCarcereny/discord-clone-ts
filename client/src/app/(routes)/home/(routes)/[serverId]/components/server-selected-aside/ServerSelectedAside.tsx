@@ -102,7 +102,7 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
           </div>
 
           {textVisible && (
-            <ul className="flex flex-col">
+            <ul className="flex flex-col gap-1">
               {channelTypeText.map((channel) => {
                 return (
                   <ChannelTypeText
@@ -113,6 +113,8 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
                     openModal={() => openModal("text")}
                     closeModal={() => closeModal()}
                     isOpen={isOpen}
+                    serverId={serverId}
+                    firstChannel={firstChannel}
                   />
                 );
               })}

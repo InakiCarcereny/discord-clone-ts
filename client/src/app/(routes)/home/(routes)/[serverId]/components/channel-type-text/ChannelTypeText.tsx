@@ -1,13 +1,22 @@
+"use client";
+
 import { useChannel } from "@/app/(routes)/home/context/channel";
 import { CloseModalButton, Separator } from "@/app/components";
 import { Hash } from "@/app/icons/Hash";
 import { Settings } from "@/app/icons/Settings";
+import { Channel } from "@/app/models/channel";
+import Link from "next/link";
+
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface ChannelTypeTextProps {
   id: string;
   name: string;
   isMatching: boolean;
   isOpen: string | boolean;
+  serverId: string;
+  firstChannel: Channel | undefined;
   openModal: () => void;
   closeModal: () => void;
 }
@@ -19,23 +28,41 @@ export function ChannelTypeText({
   openModal,
   isOpen,
   closeModal,
+  serverId,
+  firstChannel,
 }: ChannelTypeTextProps) {
+  const [firstVisit, setFirstVisit] = useState(true);
+
   const open = isOpen === "text";
+
+  const pathname = usePathname();
+
+  const isActive = pathname.startsWith(`/home/${serverId}/${id}`);
+  const style = isActive || (firstChannel?._id === id && firstVisit);
+
+  useEffect(() => {
+    if (firstChannel?._id === id && firstVisit) {
+      setFirstVisit(true);
+    } else if (firstChannel?._id === id && !firstVisit) {
+      setFirstVisit(false);
+    }
+  }, [isActive, firstVisit, firstChannel?._id, id]);
 
   const { deleteChannel } = useChannel();
 
   return (
     <>
-      <li
+      <Link
+        href={`/home/${serverId}/${id}`}
         key={id}
         className={`flex items-center justify-between px-2 py-2 rounded-[4px] hover:bg-[#2f3136] group
-
+          ${style ? "bg-zinc-600 text-white" : "text-gray-400"}
         `}
       >
         <div className="flex items-center gap-2">
           <Hash className="text-gray-400 w-5 h-5" />
           <span
-            className={`group-hover:text-white font-semibold text-gray-400 text-sm truncate `}
+            className={`group-hover:text-white font-semibold text-sm truncate `}
           >
             {name}
           </span>
@@ -43,7 +70,7 @@ export function ChannelTypeText({
         <button onClick={openModal} className="group-hover:block hidden">
           <Settings className="text-gray-400 w-5 h-5" />
         </button>
-      </li>
+      </Link>
 
       {open && (
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">

@@ -1,5 +1,6 @@
 "use client";
 
+// import { useChannel } from "@/app/(routes)/home/context/channel";
 import { Separator } from "@/app/components";
 import { useGetFirstChannel } from "@/app/hooks/useGetFirstChannel";
 import { Friends } from "@/app/icons/Friends";
@@ -7,6 +8,8 @@ import { Hash } from "@/app/icons/Hash";
 
 export function ServerSelectedHeader({ serverId }: { serverId: string }) {
   const { firstChannel } = useGetFirstChannel(serverId);
+
+  // const { channels } = useChannel();
 
   return (
     <header className="w-full h-[54px] flex flex-col justify-between">
