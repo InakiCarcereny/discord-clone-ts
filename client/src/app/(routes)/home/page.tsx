@@ -38,10 +38,10 @@ export default function Home() {
                 {userInfo?.name}
               </TableCell>
               <TableCell className="flex items-center gap-2">
-                <button className="rounded-full flex items-center justify-center bg-zinc-900 px-2 py-1 text-gray-400 hover:text-white">
+                <button className="rounded-full flex items-center justify-center bg-zinc-900 px-2 py-2 text-gray-400 hover:text-white">
                   <Message className="h-6 w-6" />
                 </button>
-                <button className="rounded-full flex items-center justify-center bg-zinc-900 px-2 py-1 text-gray-400 hover:text-white">
+                <button className="rounded-full flex items-center justify-center bg-zinc-900 px-2 py-2 text-gray-400 hover:text-white">
                   <Dots className="h-6 w-6" />
                 </button>
               </TableCell>

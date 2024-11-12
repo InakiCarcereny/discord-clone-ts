@@ -5,9 +5,18 @@ import { Hash } from "@/app/icons/Hash";
 import { Pencil } from "@/app/icons/Pencil";
 import { PlusWithBg } from "@/app/icons/PlusWithBg";
 import { EmojiPicker } from "../emoji-picker/EmojiPicker";
+import { useRef, useState } from "react";
 
 export function ServerSelected({ serverId }: { serverId: string }) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState("");
+
   const { firstChannel } = useGetFirstChannel(serverId);
+
+  const handleEmojiSelect = (emoji: string) => {
+    setInputValue((prevState) => prevState + emoji);
+    inputRef.current?.focus();
+  };
 
   return (
     <div className="h-full pb-8 px-4 flex flex-col justify-end gap-6">
@@ -31,12 +40,15 @@ export function ServerSelected({ serverId }: { serverId: string }) {
             <PlusWithBg className="h-5 w-5" />
           </button>
           <input
+            ref={inputRef}
+            onChange={(e) => setInputValue(e.target.value)}
+            value={inputValue}
             type="text"
             className="bg-transparent focus:outline-none w-full placeholder:text-sm placeholder:text-zinc-500 text-white text-sm"
             placeholder={`Send message to #${firstChannel?.name}`}
           />
         </div>
-        <EmojiPicker onChange={(emoji: string) => console.log(emoji)} />
+        <EmojiPicker onChange={handleEmojiSelect} />
       </div>
     </div>
   );
