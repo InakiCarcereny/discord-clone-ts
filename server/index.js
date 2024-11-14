@@ -12,6 +12,7 @@ import channelRoutes from "./routes/channel.js";
 import eventRoutes from "./routes/event.js";
 import infoRoutes from "./routes/userInfo.js";
 import friendRequestRoutes from "./routes/friendRequest.js";
+import friendsRoutes from "./routes/friends.js";
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/server", channelRoutes);
 app.use("/server", eventRoutes);
 app.use("/info", infoRoutes);
 app.use("/friend-request", friendRequestRoutes);
+app.use("/friends", friendsRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
