@@ -8,3 +8,9 @@ export const getFriendRecipientRequestsRequest = async () =>
 
 export const addFriendRequest = async (sender: string, recipient: string) =>
   axios.post(`/friend-request/${sender}/friend-request/${recipient}`);
+
+export const acceptFriendRequest = async (
+  recipient: string,
+  requestId: string
+) =>
+  axios.post(`/friend-request/${recipient}/accept-friend-request/${requestId}`);
