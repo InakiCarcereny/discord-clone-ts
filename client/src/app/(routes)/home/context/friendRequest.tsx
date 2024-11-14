@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  acceptFriendRequest,
   addFriendRequest,
   getFriendRecipientRequestsRequest,
   getFriendRequestsRequest,
@@ -19,6 +20,7 @@ interface FriendRequestContextType {
   recipientRequest: FriendRequest[];
   errors: string[];
   addFriend: (sender: string, recipient: string) => Promise<void>;
+  acceptFriend: (recipient: string, requestId: string) => Promise<void>;
 }
 
 export interface FriendRequest {
@@ -88,15 +90,17 @@ export function FriendRequestProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  // const acceptFriend = async (recipient: string, requestId: string) => {
-  //   try {
-  //     const res = await acceptFriendRequest(recipient, requestId);
-  //   } catch (err: unknown) {
-  //     if (err instanceof AxiosError && err.response) {
-  //       setErrors(err.response.data);
-  //     }
-  //   }
-  // };
+  const acceptFriend = async (recipient: string, requestId: string) => {
+    try {
+      const res = await acceptFriendRequest(recipient, requestId);
+      setFriendRequest((prevState) => [...prevState, res.data]);
+    } catch (err: unknown) {
+      console.log(err);
+      if (err instanceof AxiosError && err.response) {
+        setErrors(err.response.data);
+      }
+    }
+  };
 
   return (
     <FriendRequestContext.Provider
@@ -105,6 +109,7 @@ export function FriendRequestProvider({ children }: { children: ReactNode }) {
         recipientRequest,
         addFriend,
         errors,
+        acceptFriend,
       }}
     >
       {children}
