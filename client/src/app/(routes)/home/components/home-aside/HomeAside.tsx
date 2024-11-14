@@ -5,6 +5,7 @@ import { NavigateOption } from "../navigate-option/NavigateOption";
 import { useModal } from "@/app/hooks/useModal";
 
 import { options } from "@/app/consts/options";
+import { PlusWithoutBg } from "@/app/icons/PlusWithoutBg";
 
 export function HomeAside() {
   const { isOpen, openModal, closeModal } = useModal();
@@ -36,9 +37,16 @@ export function HomeAside() {
         })}
       </ul>
 
-      <div className="flex flex-col gap-2">
-        {/* aca va la seccione de mensajes */}
-      </div>
+      <section className="flex flex-col gap-2 mt-4">
+        <div className="flex items-center justify-between px-2">
+          <span className="text-xs text-zinc-400 font-semibold">
+            DIRECT MESSAGES
+          </span>
+          <button className="text-zinc-400 hover:text-white">
+            <PlusWithoutBg className="w-4 h-4" />
+          </button>
+        </div>
+      </section>
 
       {open && <SearchServerModal onCloseModal={() => closeModal()} />}
     </aside>

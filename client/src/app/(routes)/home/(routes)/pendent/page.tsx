@@ -2,7 +2,6 @@
 
 import { Search } from "@/app/icons/Search";
 import { useFriendRequest } from "../../context/friendRequest";
-// import { useUserInfo } from "../profile/context/userInfo";
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { CrossWithoutBg } from "@/app/icons/CrossWithoutBg";
@@ -10,9 +9,7 @@ import { Tick } from "@/app/icons/Tick";
 import { useAuth } from "@/app/context/auth";
 
 export default function Pendent() {
-  const { friendRequest, recipientRequest } = useFriendRequest();
-
-  // const { userInfo } = useUserInfo();
+  const { friendRequest, recipientRequest, acceptFriend } = useFriendRequest();
 
   const { user } = useAuth();
 
@@ -35,7 +32,7 @@ export default function Pendent() {
         <Search className="text-white h-6 w-6" />
       </header>
 
-      <section className="flex flex-col gap-6">
+      <section className="flex flex-col gap-2">
         <h3 className="font-semibold text-sm text-zinc-300">
           PENDINGS -{" "}
           {filteredFriendRequest.length + filteredRecipientRequest.length}
@@ -51,7 +48,14 @@ export default function Pendent() {
                   {friendReq.sender}
                 </TableCell>
                 <TableCell className="flex items-center gap-2">
-                  <button className="rounded-full flex items-center justify-center bg-zinc-800/60 px-2 py-2 text-gray-400 hover:text-green-500">
+                  <button
+                    onClick={() => {
+                      if (user?.id) {
+                        acceptFriend(user?.id, friendReq._id);
+                      }
+                    }}
+                    className="rounded-full flex items-center justify-center bg-zinc-800/60 px-2 py-2 text-gray-400 hover:text-green-500"
+                  >
                     <Tick className="h-6 w-6" />
                   </button>
 
