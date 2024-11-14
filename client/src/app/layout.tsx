@@ -8,6 +8,7 @@ import { UserInfoProvider } from "./(routes)/home/(routes)/profile/context/userI
 import { ChannelProvider } from "./(routes)/home/context/channel";
 import { EventProvider } from "./(routes)/home/(routes)/[serverId]/context/event";
 import { FriendRequestProvider } from "./(routes)/home/context/friendRequest";
+import { FriendsProvider } from "./(routes)/home/context/friends";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -33,7 +34,9 @@ export default function RootLayout({
             <UserInfoProvider>
               <ChannelProvider>
                 <EventProvider>
-                  <FriendRequestProvider>{children}</FriendRequestProvider>
+                  <FriendRequestProvider>
+                    <FriendsProvider>{children}</FriendsProvider>
+                  </FriendRequestProvider>
                 </EventProvider>
               </ChannelProvider>
             </UserInfoProvider>
