@@ -14,3 +14,15 @@ export const acceptFriendRequest = async (
   requestId: string
 ) =>
   axios.post(`/friend-request/${recipient}/accept-friend-request/${requestId}`);
+
+export const rejectFriendRequest = async (
+  recipient: string,
+  requestId: string
+) =>
+  axios.post(`/friend-request/${recipient}/reject-friend-request/${requestId}`);
+
+export const deleteFriendRequestRequest = async (
+  sender: string,
+  requestId: string
+) =>
+  axios.delete(`/friend-request/${sender}/delete-friend-request/${requestId}`);

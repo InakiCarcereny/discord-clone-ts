@@ -3,8 +3,10 @@
 import {
   acceptFriendRequest,
   addFriendRequest,
+  deleteFriendRequestRequest,
   getFriendRecipientRequestsRequest,
   getFriendRequestsRequest,
+  rejectFriendRequest,
 } from "@/app/interceptors/friendRequest";
 import { AxiosError } from "axios";
 import {
@@ -21,6 +23,8 @@ interface FriendRequestContextType {
   errors: string[];
   addFriend: (sender: string, recipient: string) => Promise<void>;
   acceptFriend: (recipient: string, requestId: string) => Promise<void>;
+  rejectFriend: (recipient: string, requestId: string) => Promise<void>;
+  deleteFriendRequest: (requestId: string) => Promise<void>;
 }
 
 export interface FriendRequest {
@@ -31,8 +35,9 @@ export interface FriendRequest {
   createdAt: Date;
 }
 
-export const FriendRequestContext =
-  createContext<FriendRequestContextType | null>(null);
+export const FriendRequestContext = createContext<
+  FriendRequestContextType | undefined
+>(undefined);
 
 export function useFriendRequest() {
   const context = useContext(FriendRequestContext);
@@ -102,6 +107,38 @@ export function FriendRequestProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const rejectFriend = async (recipient: string, requestId: string) => {
+    try {
+      const res = await rejectFriendRequest(recipient, requestId);
+      if (res.status === 200) {
+        setFriendRequest((prevState) =>
+          prevState.filter((friend: FriendRequest) => friend._id !== requestId)
+        );
+      }
+    } catch (err: unknown) {
+      console.log(err);
+      if (err instanceof AxiosError && err.response) {
+        setErrors(err.response.data);
+      }
+    }
+  };
+
+  const deleteFriendRequest = async (sender: string, requestId: string) => {
+    try {
+      const res = await deleteFriendRequestRequest(sender, requestId);
+      if (res.status === 200) {
+        setFriendRequest((prevState) =>
+          prevState.filter((friend: FriendRequest) => friend._id !== requestId)
+        );
+      }
+    } catch (err: unknown) {
+      console.log(err);
+      if (err instanceof AxiosError && err.response) {
+        setErrors(err.response.data);
+      }
+    }
+  };
+
   return (
     <FriendRequestContext.Provider
       value={{
@@ -110,6 +147,8 @@ export function FriendRequestProvider({ children }: { children: ReactNode }) {
         addFriend,
         errors,
         acceptFriend,
+        rejectFriend,
+        deleteFriendRequest,
       }}
     >
       {children}
