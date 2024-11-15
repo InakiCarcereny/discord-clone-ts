@@ -6,6 +6,7 @@ import {
   rejectRequest,
   getFriendRequests,
   getFriendRecipientRequests,
+  deleteRequest,
 } from "../controllers/friendRequest.js";
 
 const routes = Router();
@@ -20,6 +21,8 @@ routes.post(
 
 routes.post("/:id/accept-friend-request/:requestId", acceptRequest);
 
-routes.post("/reject-friend-request/:requestId", rejectRequest);
+routes.post("/:id/reject-friend-request/:requestId", rejectRequest);
+
+routes.delete("/:id/delete-friend-request/:requestId", deleteRequest);
 
 export default routes;

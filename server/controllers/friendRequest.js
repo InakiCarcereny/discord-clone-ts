@@ -172,10 +172,18 @@ export const acceptRequest = async (req, res) => {
 };
 
 export const rejectRequest = async (req, res) => {
-  const userId = req.user._id;
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
   const requestId = req.params.requestId;
 
   try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+
+    const userId = decoded.id;
     // Obtener la solicitud de amistad
     const friendRequest = await FriendRequest.findById(requestId);
     if (
@@ -193,8 +201,44 @@ export const rejectRequest = async (req, res) => {
 
     res.status(200).json({ message: "Solicitud de amistad rechazada." });
   } catch (error) {
+    console.log(error);
     res
       .status(500)
       .json({ message: "Error al rechazar la solicitud de amistad." });
+  }
+};
+
+export const deleteRequest = async (req, res) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const requestId = req.params.requestId;
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+
+    const userId = decoded.id;
+    // Obtener la solicitud de amistad
+    const friendRequest = await FriendRequest.findById(requestId);
+    if (
+      !friendRequest ||
+      friendRequest.sender.toString() !== userId.toString()
+    ) {
+      return res.status(400).json({
+        message: "Solicitud de amistad no encontrada o no autorizada.",
+      });
+    }
+
+    // Eliminar la solicitud de amistad
+    await friendRequest.delete();
+
+    res.status(200).json({ message: "Solicitud de amistad eliminada." });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ message: "Error al eliminar la solicitud de amistad." });
   }
 };
