@@ -11,5 +11,8 @@ export const createChannelRequest = async (data: Channel, serverId: Id) =>
 export const updateChannelRequest = async (data: Channel, serverId: Id) =>
   axios.put(`/server/${serverId}/channel/${data._id}`, data);
 
-export const deleteChannelRequest = async (data: Channel, serverId: Id) =>
-  axios.delete(`/server/${serverId}/channel/${data._id}`);
+export const deleteChannelRequest = async (data: string, serverId: Id) => {
+  console.log(data);
+  console.log(serverId);
+  return axios.delete(`/server/${serverId}/channel/${data}`);
+};
