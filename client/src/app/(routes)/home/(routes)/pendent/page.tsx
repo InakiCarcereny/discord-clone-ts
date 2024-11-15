@@ -9,7 +9,13 @@ import { Tick } from "@/app/icons/Tick";
 import { useAuth } from "@/app/context/auth";
 
 export default function Pendent() {
-  const { friendRequest, recipientRequest, acceptFriend } = useFriendRequest();
+  const {
+    friendRequest,
+    recipientRequest,
+    acceptFriend,
+    rejectFriend,
+    deleteFriendRequest,
+  } = useFriendRequest();
 
   const { user } = useAuth();
 
@@ -59,7 +65,14 @@ export default function Pendent() {
                     <Tick className="h-6 w-6" />
                   </button>
 
-                  <button className="rounded-full flex items-center justify-center bg-zinc-800/60 px-2 py-2 text-gray-400 hover:text-red-500">
+                  <button
+                    onClick={() => {
+                      if (user?.id) {
+                        rejectFriend(user?.id, friendReq._id);
+                      }
+                    }}
+                    className="rounded-full flex items-center justify-center bg-zinc-800/60 px-2 py-2 text-gray-400 hover:text-red-500"
+                  >
                     <CrossWithoutBg className="h-6 w-6" />
                   </button>
                 </TableCell>
@@ -75,7 +88,12 @@ export default function Pendent() {
                   {friendReq.recipient}
                 </TableCell>
                 <TableCell className="flex items-center gap-2">
-                  <button className="rounded-full flex items-center justify-center bg-zinc-800/60 px-2 py-2 text-gray-400 hover:text-red-500">
+                  <button
+                    onClick={() =>
+                      deleteFriendRequest(friendReq.sender, friendReq._id)
+                    }
+                    className="rounded-full flex items-center justify-center bg-zinc-800/60 px-2 py-2 text-gray-400 hover:text-red-500"
+                  >
                     <CrossWithoutBg className="h-6 w-6" />
                   </button>
                   {friendReq.sender === user?.id ? null : (
