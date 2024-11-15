@@ -20,6 +20,8 @@ import { useGetFirstChannel } from "@/app/hooks/useGetFirstChannel";
 import { ChannelTypeText } from "../channel-type-text/ChannelTypeText";
 import { ChannelTypeVoice } from "../channel-type-voice/ChannelTypeVoice";
 import { ArrowRight } from "@/app/icons/ArrowRight";
+import { InviteFriendsModal } from "../invite-friends-modal/InviteFriendsModal";
+import { useServer } from "@/app/(routes)/home/context/server";
 
 export function ServerSelectedAside({ serverId }: { serverId: string }) {
   const [textVisible, setTextVisible] = useState(true);
@@ -28,6 +30,7 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
   const { toggleModal, isOpen, closeModal, openModal } = useModal();
   const { isOpenOptions, handleOpenOptions } = useModalOptions();
   const { channels, getChannels } = useChannel();
+  const { showMembers } = useServer();
 
   const { firstChannel } = useGetFirstChannel(serverId);
 
@@ -41,7 +44,6 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
 
   useEffect(() => {
     getChannels(serverId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleTextVisibilityChange = () => {
@@ -96,7 +98,7 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
                 TEXT CHANNELS
               </span>
             </div>
-            <button>
+            <button onClick={() => handleOpenOptions(3)}>
               <PlusWithoutBg className="text-gray-400 h-4 w-4" />
             </button>
           </div>
@@ -167,6 +169,10 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
           handleOpenOptions={handleOpenOptions}
           serverId={serverId}
         />
+      )}
+
+      {isOpenOptions === 1 && (
+        <InviteFriendsModal handleOpenOptions={handleOpenOptions} />
       )}
 
       {isOpenOptions === 2 && (

@@ -8,7 +8,6 @@ import { Channel } from "@/app/models/channel";
 import Link from "next/link";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 
 interface ChannelTypeTextProps {
   id: string;
@@ -31,22 +30,13 @@ export function ChannelTypeText({
   serverId,
   firstChannel,
 }: ChannelTypeTextProps) {
-  const [firstVisit, setFirstVisit] = useState(true);
-
   const open = isOpen === "text";
 
   const pathname = usePathname();
 
-  const isActive = pathname.startsWith(`/home/${serverId}/${id}`);
-  const style = isActive || (firstChannel?._id === id && firstVisit);
-
-  useEffect(() => {
-    if (firstChannel?._id === id && firstVisit) {
-      setFirstVisit(true);
-    } else if (firstChannel?._id === id && !firstVisit) {
-      setFirstVisit(false);
-    }
-  }, [isActive, firstVisit, firstChannel?._id, id]);
+  const isActive =
+    pathname.startsWith(`/home/${serverId}/${id}`) ||
+    (pathname === `/home/${serverId}` && firstChannel?._id === id);
 
   const { deleteChannel } = useChannel();
 
@@ -56,7 +46,7 @@ export function ChannelTypeText({
         href={`/home/${serverId}/${id}`}
         key={id}
         className={`flex items-center justify-between px-2 py-2 rounded-[4px] hover:bg-[#2f3136] group
-          ${style ? "bg-zinc-600 text-white" : "text-gray-400"}
+          ${isActive ? "bg-zinc-600 text-white" : "text-gray-400"}
         `}
       >
         <div className="flex items-center gap-2">

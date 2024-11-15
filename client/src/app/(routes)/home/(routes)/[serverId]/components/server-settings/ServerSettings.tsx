@@ -1,7 +1,7 @@
 "use client";
 
 import { InputRegister } from "@/app/(routes)/register/components";
-import { CloseModalButton } from "@/app/components";
+import { Button, CloseModalButton } from "@/app/components";
 
 import { useForm } from "react-hook-form";
 
@@ -38,22 +38,20 @@ export function ServerSettings({
     const form = new FormData();
     form.append("tittle", data.tittle);
     form.append("logo", logo[0]);
-    console.log(form.get("tittle"));
-    console.log(form.get("logo"));
 
     updateServer(form, serverId);
-    window.location.reload();
+    handleOpenOptions(null);
   });
 
   useEffect(() => {
     setValue("tittle", verified);
-  });
+  }, [verified, setValue]);
 
   return (
     <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
       <form
         onSubmit={onSubmit}
-        className="bg-[#2b2b30] w-[400px] h-[300px] rounded-[4px] px-4 py-4 flex flex-col gap-8 relative"
+        className="bg-[#2b2b30] w-[400px] min-h-[300px] rounded-[4px] px-4 py-4 flex flex-col gap-8 relative"
       >
         <header className="flex items-center justify-between w-full">
           <h3 className="font-semibold text-white text-xl">Server view</h3>
@@ -76,12 +74,7 @@ export function ServerSettings({
           />
         </div>
 
-        <button
-          type="submit"
-          className="text-white font-semibold text-sm bg-green-700 w-full rounded-[4px] px-2 py-1 duration-200 hover:bg-green-900"
-        >
-          Save changes
-        </button>
+        <Button label="Save changes" type="submit" />
       </form>
     </div>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { useServer } from "@/app/(routes)/home/context/server";
 // import { useChannel } from "@/app/(routes)/home/context/channel";
 import { Separator } from "@/app/components";
 import { useGetFirstChannel } from "@/app/hooks/useGetFirstChannel";
@@ -8,6 +9,8 @@ import { Hash } from "@/app/icons/Hash";
 
 export function ServerSelectedHeader({ serverId }: { serverId: string }) {
   const { firstChannel } = useGetFirstChannel(serverId);
+
+  const { toggleMembers, showMembers } = useServer();
 
   // const { channels } = useChannel();
 
@@ -22,7 +25,14 @@ export function ServerSelectedHeader({ serverId }: { serverId: string }) {
             </span>
           ) : null}
         </h3>
-        <Friends className="text-gray-400 h-6 w-6" />
+        <button
+          onClick={toggleMembers}
+          className={`text-gray-400 hover:text-white ${
+            showMembers ? "" : "text-white"
+          }`}
+        >
+          <Friends className="h-6 w-6" />
+        </button>
       </div>
       <Separator className="border border-[#2b2c31] rounded-full w-full" />
     </header>
