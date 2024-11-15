@@ -22,9 +22,11 @@ import { AxiosError, AxiosResponse } from "axios";
 interface ServerContextType {
   server: Server[];
   errors: string[];
+  showMembers: boolean;
   deleteServer: (data: ServerId) => Promise<void>;
   createServer: (data: Server) => Promise<void>;
   updateServer: (data: Server, serverId: ServerId) => Promise<void>;
+  toggleMembers: () => void;
   isOwner: (serverId: ServerId) => Promise<AxiosResponse<Server> | undefined>;
 }
 
@@ -45,6 +47,11 @@ export function useServer() {
 export function ServerProvider({ children }: { children: ReactNode }) {
   const [server, setServer] = useState<Server[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
+  const [showMembers, setShowMembers] = useState<boolean>(true);
+
+  const toggleMembers = () => {
+    setShowMembers((prevState) => !prevState);
+  };
 
   useEffect(() => {
     async function getServers() {
@@ -122,6 +129,8 @@ export function ServerProvider({ children }: { children: ReactNode }) {
         createServer,
         updateServer,
         isOwner,
+        showMembers,
+        toggleMembers,
       }}
     >
       {children}

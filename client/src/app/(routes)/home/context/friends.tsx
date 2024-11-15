@@ -48,6 +48,7 @@ export function FriendsProvider({ children }: { children: ReactNode }) {
     async function getFriends() {
       try {
         const res = await getFriendsRequest();
+        console.log(res);
         setFriends(res.data);
       } catch (err: unknown) {
         if (err instanceof AxiosError && err.response) {
