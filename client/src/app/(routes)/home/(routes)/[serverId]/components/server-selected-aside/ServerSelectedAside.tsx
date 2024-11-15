@@ -21,30 +21,56 @@ import { ChannelTypeText } from "../channel-type-text/ChannelTypeText";
 import { ChannelTypeVoice } from "../channel-type-voice/ChannelTypeVoice";
 import { ArrowRight } from "@/app/icons/ArrowRight";
 import { InviteFriendsModal } from "../invite-friends-modal/InviteFriendsModal";
-import { useServer } from "@/app/(routes)/home/context/server";
+import { ViewEventModal } from "../view-event-modal/ViewEventModal";
+import { useEvent } from "../../context/event";
+import { usePathname } from "next/navigation";
+import { Hash } from "@/app/icons/Hash";
 
 export function ServerSelectedAside({ serverId }: { serverId: string }) {
   const [textVisible, setTextVisible] = useState(true);
   const [voiceVisible, setVoiceVisible] = useState(true);
 
+  const pathname = usePathname();
+
   const { toggleModal, isOpen, closeModal, openModal } = useModal();
+
   const { isOpenOptions, handleOpenOptions } = useModalOptions();
+
   const { channels, getChannels } = useChannel();
-  const { showMembers } = useServer();
+
+  const { getEvents } = useEvent();
+
+  // const { showMembers } = useServer();
+
+  const { events } = useEvent();
 
   const { firstChannel } = useGetFirstChannel(serverId);
 
   const open = isOpen === "server-options";
 
-  const isMatching = firstChannel === channels[0];
+  const openEventModal = isOpen === "event-modal";
+
+  const currentChannelId = pathname.split("/").pop();
+
+  const currentChannel = channels.find(
+    (channel) => channel._id === currentChannelId
+  );
 
   const toggle = () => () => {
     toggleModal("server-options");
   };
 
   useEffect(() => {
-    getChannels(serverId);
-  }, []);
+    if (serverId) {
+      getChannels(serverId);
+    }
+  }, [serverId]);
+
+  useEffect(() => {
+    if (serverId) {
+      getEvents(serverId);
+    }
+  }, [serverId]);
 
   const handleTextVisibilityChange = () => {
     setTextVisible(!textVisible);
@@ -70,12 +96,12 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
 
       <nav className="flex flex-col gap-4 px-2 mt-3">
         <button
-          onClick={() => toggleModal("calendar")}
+          onClick={() => toggleModal("event-modal")}
           className="flex items-center gap-2 rounded-[4px] hover:bg-[#2f3136] px-2 py-1"
         >
           <Calendar className="text-gray-400 h-6 w-6" />
           <span className="text-gray-400 text-base font-semibold">
-            Calendar
+            {events.length > 0 ? `${events.length}` : ""} Events
           </span>
         </button>
 
@@ -98,12 +124,17 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
                 TEXT CHANNELS
               </span>
             </div>
-            <button onClick={() => handleOpenOptions(3)}>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleOpenOptions(3);
+              }}
+            >
               <PlusWithoutBg className="text-gray-400 h-4 w-4" />
             </button>
           </div>
 
-          {textVisible && (
+          {textVisible ? (
             <ul className="flex flex-col gap-1">
               {channelTypeText.map((channel) => {
                 return (
@@ -111,7 +142,6 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
                     key={channel._id}
                     id={channel._id}
                     name={channel.name}
-                    isMatching={isMatching}
                     openModal={() => openModal("text")}
                     closeModal={() => closeModal()}
                     isOpen={isOpen}
@@ -121,6 +151,19 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
                 );
               })}
             </ul>
+          ) : (
+            <li
+              className={`flex items-center gap-2 px-2 py-2 hover:bg-[#323338] duration-200 rounded-[4px] ${
+                pathname === `/home/${serverId}/${currentChannel?._id}`
+                  ? "bg-zinc-600 text-white"
+                  : "text-gray-400"
+              }`}
+            >
+              <Hash className="text-gray-400 h-5 w-5" />
+              <span className="font-semibold text-sm">
+                {currentChannel?.name}
+              </span>
+            </li>
           )}
         </section>
 
@@ -154,7 +197,6 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
                     key={channel._id}
                     id={channel._id}
                     name={channel.name}
-                    isMatching={isMatching}
                   />
                 );
               })}
@@ -168,6 +210,14 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
           closeModal={closeModal}
           handleOpenOptions={handleOpenOptions}
           serverId={serverId}
+        />
+      )}
+
+      {openEventModal && (
+        <ViewEventModal
+          serverId={serverId}
+          closeModal={() => closeModal()}
+          handleOpenOptions={handleOpenOptions}
         />
       )}
 
@@ -194,6 +244,7 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
         <CreateEventModal
           handleOpenOptions={handleOpenOptions}
           serverId={serverId}
+          openModal={() => openModal("event-modal")}
         />
       )}
     </aside>

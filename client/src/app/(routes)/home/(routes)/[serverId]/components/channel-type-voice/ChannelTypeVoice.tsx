@@ -4,14 +4,9 @@ import { Volume } from "@/app/icons/Volume";
 interface ChannelTypeVoiceProps {
   id: string;
   name: string;
-  isMatching: boolean;
 }
 
-export function ChannelTypeVoice({
-  id,
-  name,
-  isMatching,
-}: ChannelTypeVoiceProps) {
+export function ChannelTypeVoice({ id, name }: ChannelTypeVoiceProps) {
   return (
     <li
       key={id}

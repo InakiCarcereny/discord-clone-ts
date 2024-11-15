@@ -12,7 +12,6 @@ import { usePathname } from "next/navigation";
 interface ChannelTypeTextProps {
   id: string;
   name: string;
-  isMatching: boolean;
   isOpen: string | boolean;
   serverId: string;
   firstChannel: Channel | undefined;
@@ -23,7 +22,6 @@ interface ChannelTypeTextProps {
 export function ChannelTypeText({
   id,
   name,
-  isMatching,
   openModal,
   isOpen,
   closeModal,
@@ -45,19 +43,20 @@ export function ChannelTypeText({
       <Link
         href={`/home/${serverId}/${id}`}
         key={id}
-        className={`flex items-center justify-between px-2 py-2 rounded-[4px] hover:bg-[#2f3136] group
+        className={`flex items-center justify-between px-2 py-2 rounded-[4px] hover:bg-[#2f3136] truncate group
           ${isActive ? "bg-zinc-600 text-white" : "text-gray-400"}
         `}
       >
         <div className="flex items-center gap-2">
           <Hash className="text-gray-400 w-5 h-5" />
-          <span
-            className={`group-hover:text-white font-semibold text-sm truncate `}
-          >
+          <span className={`group-hover:text-white font-semibold text-sm`}>
             {name}
           </span>
         </div>
-        <button onClick={openModal} className="group-hover:block hidden">
+        <button
+          onClick={() => openModal()}
+          className="group-hover:block hidden"
+        >
           <Settings className="text-gray-400 w-5 h-5" />
         </button>
       </Link>
@@ -73,13 +72,16 @@ export function ChannelTypeText({
             </header>
 
             <section className="flex items-center justify-between">
-              <button
-                onClick={() => deleteChannel(id)}
-                className="text-sm text-gray-400 font-semibold"
-              >
+              <span className="text-sm text-gray-400 font-semibold">
                 DELETE CHANNEL
-              </button>
-              <button className="bg-red-600 text-white font-semibold text-sm px-6 py-2 rounded-[4px]">
+              </span>
+              <button
+                onClick={() => {
+                  closeModal();
+                  deleteChannel(id, serverId);
+                }}
+                className="bg-red-600 text-white font-semibold text-sm px-6 py-2 rounded-[4px]"
+              >
                 Delete channel
               </button>
             </section>

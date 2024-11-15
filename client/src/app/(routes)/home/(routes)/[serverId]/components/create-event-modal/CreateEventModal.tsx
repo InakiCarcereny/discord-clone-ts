@@ -8,8 +8,9 @@ import { OptionId } from "@/app/hooks/useModalOptions";
 import { useEvent } from "../../context/event";
 
 interface CreateEventModalProps {
-  handleOpenOptions: (option: OptionId) => void;
   serverId: string;
+  handleOpenOptions: (option: OptionId) => void;
+  openModal: (option: string) => void;
 }
 
 interface FormValues {
@@ -23,6 +24,7 @@ interface FormValues {
 export function CreateEventModal({
   handleOpenOptions,
   serverId,
+  openModal,
 }: CreateEventModalProps) {
   const {
     register,
@@ -33,7 +35,8 @@ export function CreateEventModal({
   const { createEvent } = useEvent();
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
+    openModal("event-modal");
+    handleOpenOptions(null);
     createEvent(data, serverId);
   });
 
@@ -99,14 +102,20 @@ export function CreateEventModal({
 
         <footer className="flex items-center justify-between w-full h-[100px] bg-[#212124] px-4">
           <button
-            onClick={() => handleOpenOptions(null)}
+            onClick={() => {
+              openModal("event-modal");
+              handleOpenOptions(null);
+            }}
             className="text-cyan-600 font-semibold text-sm hover:underline-offset-1 hover:underline"
             type="button"
           >
             Back
           </button>
           <div className="flex items-center gap-2">
-            <button className="bg-zinc-700 text-white font-semibold text-sm px-4 py-2 rounded-[4px] duration-200 hover:bg-zinc-600">
+            <button
+              onClick={() => handleOpenOptions(null)}
+              className="bg-zinc-700 text-white font-semibold text-sm px-4 py-2 rounded-[4px] duration-200 hover:bg-zinc-600"
+            >
               Cancel
             </button>
             <button className="bg-[#5865f2] text-white font-semibold text-sm px-4 py-2 rounded-[4px] duration-200 hover:bg-blue-700">
