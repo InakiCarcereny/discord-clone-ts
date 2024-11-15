@@ -1,41 +1,41 @@
 # 🖥️ Discord Clone TS
 
-¡Bienvenido a **Discord Clone TS**! 🚀  
-Este proyecto es un clon funcional de **Discord**, desarrollado con **TypeScript** y herramientas modernas. Ofrece una plataforma para la comunicación en tiempo real mediante servidores, canales y mensajes, inspirada en el diseño y las funcionalidades de Discord. 🎧💬
+Welcome to **Discord Clone TS**! 🚀  
+This project is a functional clone of **Discord**, developed with **TypeScript** and modern tools. It provides a platform for real-time communication through servers, channels, and messages, inspired by the design and features of Discord. 🎧💬
 
-## ✨ Características
+## ✨ Features
 
-- 🔒 **Autenticación de usuarios**: Registro, inicio de sesión y gestión de perfiles.
-- 🏰 **Creación de servidores**: Organización de canales por servidores.
-- 📝 **Canales de texto y eventos**: Gestión y participación en conversaciones dentro de canales.
-- 💬 **Mensajes en tiempo real**: Comunicación fluida entre usuarios.
-- 🖼️ **Gestión de perfiles**: Personalización de avatar, descripción y más.
+- 🔒 **User Authentication**: Registration, login, and profile management.
+- 🏰 **Server Creation**: Organize channels by servers.
+- 📝 **Text Channels and Events**: Manage and participate in conversations within channels.
+- 💬 **Real-time Messaging**: Seamless communication between users.
+- 🖼️ **Profile Management**: Customize avatar, description, and more.
 
-## 🛠️ Tecnologías utilizadas
+## 🛠️ Technologies Used
 
 ### **Frontend** 🌐
 - ⚛️ [Next.js](https://nextjs.org/) (React + Server Components + TypeScript)
-- 🎨 [Tailwind CSS](https://tailwindcss.com/) (Estilización moderna)
-- 📋 [react-hook-form](https://react-hook-form.com/) (Gestión de formularios)
+- 🎨 [Tailwind CSS](https://tailwindcss.com/) (Modern styling)
+- 📋 [react-hook-form](https://react-hook-form.com/) (Form management)
 
 ### **Backend** 🖥️
-- 🌐 Node.js con [Express](https://expressjs.com/)
-- 🛢️ Base de datos [MongoDB](https://www.mongodb.com/) utilizando [Mongoose](https://mongoosejs.com/)
-- 📂 [Multer](https://github.com/expressjs/multer) para manejo de archivos
+- 🌐 Node.js with [Express](https://expressjs.com/)
+- 🛢️ Database [MongoDB](https://www.mongodb.com/) using [Mongoose](https://mongoosejs.com/)
+- 📂 [Multer](https://github.com/expressjs/multer) for file handling
 
-### **Autenticación** 🔑
-- 🛡️ JSON Web Tokens (JWT) para la gestión de sesiones.
+### **Authentication** 🔑
+- 🛡️ JSON Web Tokens (JWT) for session management.
 
-## 📋 Requisitos previos
+## 📋 Prerequisites
 
-Antes de iniciar el proyecto, asegúrate de tener instalado:  
-- 📦 [Node.js](https://nodejs.org/) (versión 18 o superior)  
-- 🧶 [npm](https://www.npmjs.com/) o [yarn](https://yarnpkg.com/)  
+Before getting started, ensure you have the following installed:  
+- 📦 [Node.js](https://nodejs.org/) (version 18 or higher)  
+- 🧶 [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)  
 - 🛢️ [MongoDB](https://www.mongodb.com/)  
 
-## 🚀 Instalación
+## 🚀 Installation
 
-1. **Clona el repositorio**:  
+1. **Clone the repository**:  
 
    ```bash
    git clone https://github.com/InakiCarcereny/discord-clone-ts.git
