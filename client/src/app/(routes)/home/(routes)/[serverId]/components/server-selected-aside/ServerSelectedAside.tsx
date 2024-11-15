@@ -130,7 +130,7 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
                 handleOpenOptions(3);
               }}
             >
-              <PlusWithoutBg className="text-gray-400 h-4 w-4" />
+              <PlusWithoutBg className="text-gray-400 h-4 w-4 hover:text-white" />
             </button>
           </div>
 
@@ -185,7 +185,7 @@ export function ServerSelectedAside({ serverId }: { serverId: string }) {
               </span>
             </div>
             <button>
-              <PlusWithoutBg className="text-gray-400 h-4 w-4" />
+              <PlusWithoutBg className="text-gray-400 h-4 w-4 hover:text-white" />
             </button>
           </div>
 
