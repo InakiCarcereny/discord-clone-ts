@@ -1,5 +1,5 @@
 import { Greeting } from "../icons/Greeting";
-import { Store } from "../icons/Store";
+import { Robot } from "../icons/Robot";
 
 export const options = [
   {
@@ -10,8 +10,8 @@ export const options = [
   },
   {
     id: 2,
-    label: "Store",
-    icon: Store({}),
-    href: "/home/store",
+    label: "Profile",
+    icon: Robot({ className: "w-6 h-6" }),
+    href: "/home/profile",
   },
 ];
