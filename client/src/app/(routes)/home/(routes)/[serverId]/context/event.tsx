@@ -15,7 +15,7 @@ interface EventContextTypes {
   errors: string[];
   getEvents: (id: Id) => Promise<void>;
   createEvent: (data: Event, id: Id) => Promise<void>;
-  deleteEvent: (data: Event, id: Id) => Promise<void>;
+  deleteEvent: (data: Id, id: Id) => Promise<void>;
 }
 
 export const EventContext = createContext<EventContextTypes | undefined>(
@@ -49,22 +49,20 @@ export function EventProvider({ children }: { children: React.ReactNode }) {
   const createEvent = async (data: Event, id: Id): Promise<void> => {
     try {
       const res = await createEventRequest(data, id);
-      console.log(res);
       setEvents((prevState) => [...prevState, res.data]);
     } catch (err: unknown) {
-      console.log(err);
       if (err instanceof AxiosError && err.response) {
         setErrors(err.response.data);
       }
     }
   };
 
-  const deleteEvent = async (data: Event, id: Id) => {
+  const deleteEvent = async (data: Id, id: Id) => {
     try {
       const res = await deleteEventRequest(data, id);
       if (res.status === 200) {
         setEvents((prevState) =>
-          prevState.filter((event) => event._id !== data._id)
+          prevState.filter((event) => event._id !== data)
         );
       }
     } catch (err: unknown) {

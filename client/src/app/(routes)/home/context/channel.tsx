@@ -14,7 +14,7 @@ interface ChannelContextTypes {
   channels: Channel[];
   errors: string[];
   createChannel: (data: Channel, id: Id) => Promise<void>;
-  deleteChannel: (data: Channel, id: Id) => Promise<void>;
+  deleteChannel: (data: string, id: Id) => Promise<void>;
   getChannels: (id: Id) => Promise<void>;
 }
 
@@ -62,15 +62,17 @@ export function ChannelProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const deleteChannel = async (data: Channel, id: Id) => {
+  const deleteChannel = async (data: string, id: Id) => {
     try {
       const res = await deleteChannelRequest(data, id);
+      console.log(res);
       if (res.status === 200) {
         setChannels((prevState) =>
-          prevState.filter((channel: Channel) => channel._id !== data._id)
+          prevState.filter((channel: Channel) => channel._id !== data)
         );
       }
     } catch (err: unknown) {
+      console.log(err);
       if (err instanceof AxiosError && err.response) {
         setErrors(err.response.data);
       }
