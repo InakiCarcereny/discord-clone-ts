@@ -34,7 +34,7 @@ export function ChannelSelected({ channelId }: ChannelSelectedProps) {
               <p className="font-semibold text-gray-400 text-sm">
                 Here start the #{channel?.name} channel
               </p>
-              <span className="flex items-center gap-2 text-cyan-600 text-sm font-medium">
+              <span className="flex items-center gap-2 text-cyan-600 text-sm font-medium hover:bg-cyan-100/10 px-2 py-1 rounded-[4px] w-[125px] cursor-pointer">
                 <Pencil />
                 Edit channel
               </span>
