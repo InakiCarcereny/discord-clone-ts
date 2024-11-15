@@ -10,7 +10,7 @@ export const EventSchema = z.object({
     })
     .trim(),
   dateInit: z.string(),
-  dateEnd: z.string(),
+  dateEnd: z.string().optional(),
   timeInit: z
     .string({
       required_error: "Time init is required",
@@ -20,13 +20,11 @@ export const EventSchema = z.object({
     })
     .trim(),
   timeEnd: z
-    .string({
-      required_error: "Time end is required",
-    })
+    .string()
     .max(5, {
       message: "Time end must be at most 5 characters long",
     })
-    .trim(),
+    .optional(),
   frequency: z
     .string({
       required_error: "Frequency is required",

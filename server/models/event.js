@@ -12,7 +12,7 @@ const eventSchema = new mongoose.Schema(
     },
     dateEnd: {
       type: String,
-      required: true,
+      required: false,
     },
     timeInit: {
       type: String,
@@ -20,7 +20,7 @@ const eventSchema = new mongoose.Schema(
     },
     timeEnd: {
       type: String,
-      required: true,
+      required: false,
     },
     frequency: {
       type: String,

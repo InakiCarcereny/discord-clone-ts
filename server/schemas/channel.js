@@ -8,7 +8,7 @@ export const channelSchema = z.object({
     .min(3, {
       message: "Name must be at least 5 characters long",
     })
-    .max(25, {
-      message: "Name must be at most 50 characters long",
+    .max(15, {
+      message: "Name must be at most 15 characters long",
     }),
 });
